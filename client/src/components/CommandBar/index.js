@@ -5,11 +5,15 @@ import { } from '../../utils/actions';
 import './style.css';
 
 function CommandBar() {
-  // Boolean that checks whether it is a player's turn (true) or not (false)
-  const playerTurn = useSelector(state => state.playerTurn)
+  // We reference a lot from the states in this component, so select the entire state
+  const state = useSelector(state => state)
 
+  const playerDamageMod = state.playerDamageMod;
+
+  // The player decides to make an attack
   function attack() {
     console.log("attack");
+    calculateDamageNumber(playerDamageMod)
   }
 
   function flee() {
@@ -20,9 +24,20 @@ function CommandBar() {
     console.log("use potion")
   }
 
+  // Randomly generate number between 1-10 and multiply by player's damage modifier
+  function calculateDamageNumber(modifier) {
+    console.log("calculating damage number...");
+    let damageRoll = Math.floor(Math.random() * (10-1));
+    console.log(`Rolled a ${damageRoll}`);
+    let damage = damageRoll * modifier;
+    console.log(`Attack for ${damage}`)
+  }
+
   return (
     <div id="command-bar">
-      {playerTurn ? (
+
+      {/* Only show buttons when it is the player's turn */}
+      {state.playerTurn ? (
         <div id="actions">
           <button onClick={flee}>Flee</button>
           <button onClick={attack}>Attack</button>
