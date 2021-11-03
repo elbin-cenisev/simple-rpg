@@ -2,7 +2,7 @@ import React, { } from 'react';
 
 function CommandBar() {
   return (
-    <div className="command-bar">
+    <div id="command-bar">
       <p>This is the CommandBar!</p>
     </div>
   );

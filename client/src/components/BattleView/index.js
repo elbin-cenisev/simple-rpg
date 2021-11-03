@@ -1,9 +1,11 @@
 import React, { } from 'react';
+import './style.css'
 
 function BattleView() {
+
   return (
-    <div className="battle-view">
-      <p>This is the battleview!</p>
+    <div id="battle-view">
+      <img src={'./images/slime.png'} />
     </div>
   );
 };

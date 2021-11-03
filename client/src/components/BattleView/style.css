@@ -1,0 +1,13 @@
+#battle-view {
+    height: 400px;
+    width: 400px;
+    background:url("./background.jpg");
+    background-repeat: no-repeat;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+}
