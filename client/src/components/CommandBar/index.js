@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { } from '../../utils/actions';
+import { END_TURN } from '../../utils/actions';
 
 import './style.css';
 
 function CommandBar() {
+  const dispatch = useDispatch();
+
   // We reference a lot from the states in this component, so select the entire state
   const state = useSelector(state => state)
 
@@ -13,13 +15,20 @@ function CommandBar() {
   // The player decides to make an attack
   function attack() {
     console.log("attack");
+
+    // Calculate the damage that the player will inflict
     calculateDamageNumber(playerDamageMod)
+
+    // Flip playerTurn
+    dispatch({type: END_TURN});
   }
 
+  // The player decides to flee
   function flee() {
     console.log("flee")
   }
 
+  // The player decides to use an item (currently only potion)
   function useItem() {
     console.log("use potion")
   }

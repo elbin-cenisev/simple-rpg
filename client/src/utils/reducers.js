@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
     case END_TURN:
       return {
         ...state,
-        playerTur: !state.playerTurn,
+        playerTurn: !state.playerTurn,
       };
 
     // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers
