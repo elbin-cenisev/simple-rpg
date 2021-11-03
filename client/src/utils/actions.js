@@ -1,1 +1,1 @@
-export const START_BATTLE = "START_BATTLE";
+export const END_TURN = "END_TURN";

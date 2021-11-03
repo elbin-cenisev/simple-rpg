@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 import {
+  END_TURN
 } from './actions';
 
 const initialState = {
@@ -10,6 +11,11 @@ const initialState = {
 // The reducer is a function that accepts the current state and an action. It returns a new state based on that action.
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case END_TURN:
+      return {
+        ...state,
+        playerTur: !state.playerTurn,
+      };
 
     // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers
     // This saves us from a crash.
