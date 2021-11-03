@@ -1,16 +1,12 @@
 import React, { } from 'react';
-import MessageBar from '../components/MessageBar';
-import BattleView from '../components/BattleView';
-import CommandBar from '../components/CommandBar';
+import BattleView from '../components/BattleView2';
 
 function BattleScreen() {
   return (
     <>
       <div>
         <h1>BattleScreen</h1>
-        <MessageBar />
-        <BattleView />
-        <CommandBar />
+          <BattleView />
       </div>
     </>
   );
