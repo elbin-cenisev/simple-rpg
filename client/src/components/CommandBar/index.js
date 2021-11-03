@@ -1,9 +1,24 @@
 import React, { } from 'react';
+import './style.css';
 
 function CommandBar() {
+  function attack() {
+    console.log("attack");
+  }
+
+  function flee() {
+    console.log("flee")
+  }
+
+  function useItem() {
+    console.log("use potion")
+  }
+
   return (
     <div id="command-bar">
-      <p>This is the CommandBar!</p>
+      <button onClick={flee}>Flee</button>
+      <button onClick={attack}>Attack</button>
+      <button onClick={useItem}>Potion</button>
     </div>
   );
 };
