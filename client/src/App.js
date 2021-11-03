@@ -6,9 +6,9 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-
 import { setContext } from '@apollo/client/link/context';
 
+import GameProvider from './utils/GameContext';
 import BattleScreen from './pages/BattleScreen';
 
 const httpLink = createHttpLink({
@@ -35,9 +35,11 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
+          <GameProvider>
             <Switch>
               <Route exact path="/" component={BattleScreen} />
             </Switch>
+          </GameProvider>
         </div>
       </Router>
     </ApolloProvider>
