@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { END_TURN } from '../../utils/actions';
+import { PLAYER_ATTACK, END_TURN } from '../../utils/actions';
 
 import './style.css';
 
 function CommandBar() {
   const dispatch = useDispatch();
+
+  const enemy = "Slime";
 
   // We reference a lot from the states in this component, so select the entire state
   const state = useSelector(state => state)
@@ -17,10 +19,13 @@ function CommandBar() {
     console.log("attack");
 
     // Calculate the damage that the player will inflict
-    calculateDamageNumber(playerDamageMod)
+    let damage = calculateDamageNumber(playerDamageMod)
 
-    // Flip playerTurn
-    dispatch({type: END_TURN});
+    // Change the battleState to "PLAYER_ATTACK"
+    dispatch({ 
+      type: PLAYER_ATTACK, 
+      payload: `You attack the ${enemy} and deal ${damage} points of damage` 
+    })
   }
 
   // The player decides to flee
@@ -36,10 +41,14 @@ function CommandBar() {
   // Randomly generate number between 1-10 and multiply by player's damage modifier
   function calculateDamageNumber(modifier) {
     console.log("calculating damage number...");
-    let damageRoll = Math.floor(Math.random() * (10-1));
+
+    let damageRoll = Math.floor(Math.random() * (10 - 2));
     console.log(`Rolled a ${damageRoll}`);
+
     let damage = damageRoll * modifier;
     console.log(`Attack for ${damage}`)
+
+    return damage;
   }
 
   return (

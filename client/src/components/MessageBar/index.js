@@ -8,24 +8,18 @@ import './style.css';
 function MessageBar() {
   const dispatch = useDispatch();
 
-  // Name of the enemy
-  // This is currently hardcoded since I only have one enemy
-  const enemy = "Slime";
+  const message = useSelector(state => state.message);
 
   // Boolean that checks whether it is a player's turn (true) or not (false)
-  const playerTurn = useSelector(state => state.playerTurn)
-
-  // The message displayed within the Message Bar.
-  let messageEl = document.getElementById("message");
-  const [currentMessage, setMessage] = useState(`A ${enemy} has appeared!`);
+  const playerTurn = useSelector(state => state.playerTurn);
 
   function progressTurn() {
-    console.log("Test")
+
   }
 
   return (
     <div id="message-bar">
-      <p id="message">{currentMessage}</p>
+      <p id="message">{message}</p>
       {playerTurn ? (
         <span>(Select an action)</span>
       ) : (
