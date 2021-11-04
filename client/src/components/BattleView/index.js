@@ -15,7 +15,7 @@ function BattleView() {
   const message = state.message; // The message informing the player of what is going on 
   const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
-  
+
   const [endGame, setGameover] = useState(false); // This will only toggle a turn after isPlayerAlive was set to false. Once it toggles, player is redirected to /gameover.
   const [isPlayerAlive, setPlayerAliveness] = useState(true); // This toggles when the player's HP reaches 0 
   const [isEnemyAlive, setEnemyAliveness] = useState(true); // This toggles when the enemy's HP reaches 0
@@ -174,7 +174,7 @@ function BattleView() {
 
         {/* If enemy is alive, show their picture */}
         {isEnemyAlive ? (
-        <img src={'./images/slime.png'} />
+          <img src={'./images/slime.png'} />
         ) : (
           console.log("The enemy is dead")
         )}

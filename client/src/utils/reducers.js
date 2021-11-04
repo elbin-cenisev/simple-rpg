@@ -12,7 +12,7 @@ const initialState = {
 
   player: {
     name: "TestGuy",
-    maxHP: 1,
+    maxHP: 100,
     damMod: 1,
   },
 
