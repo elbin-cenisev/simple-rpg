@@ -14,13 +14,14 @@ function BattleView() {
   const message = state.message; // The message informing the player of what is going on 
   const enemy = state.enemy;     // The enemy the player is fighting
   const playerDamMod = 1; // The player's damage modifier (based on Strength)
-  const playerTurn = true;
 
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
-  const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands
+  const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
+  const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
+  const [enemyTurn, setEnemyTurn] = useState(false); // Tracks whether it is the enemy's turn
 
   // The player decides to make an attack
-  function attack() {
+  function playerAttack() {
     console.log("attack");
 
     // Restrict command-bar
@@ -37,6 +38,23 @@ function BattleView() {
       type: CHANGE_MESSAGE,
       payload: `You dealt ${damage} points of damage to the ${enemy.name}`,
     })
+
+    // End the player's turn
+    setPlayerTurn(false);
+  }
+
+  // The enemy attacks
+  function enemyAttack() {
+
+    // Display damage dealt
+    dispatch({
+      type: CHANGE_MESSAGE,
+      payload: `The ${enemy.name} hit you for 0 damage`,
+    })
+
+    // Toggle turns
+    setEnemyTurn(false);
+    setPlayerTurn(true);
   }
 
   // The player decides to flee
@@ -70,6 +88,22 @@ function BattleView() {
 
       setCommandAvailability(true); // If it is, let them choose a command
       // }
+    }
+
+    // Check whether it is the enemy's turn
+    else if(enemyTurn) {
+      enemyAttack()
+    }
+
+    /* This handles the transition from playerTurn to enemyTurn. 
+    Note that there is no need to handle the transition from enemyTurn to playerTurn, so don't confuse this */
+    else {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `The ${enemy.name} is getting ready to attack you`,
+      })
+      
+      setEnemyTurn(true);
     }
   }
 
@@ -116,7 +150,7 @@ function BattleView() {
         {commandsAvailable ? (
           <div id="actions">
             <button onClick={flee}>Flee</button>
-            <button onClick={attack}>Attack</button>
+            <button onClick={playerAttack}>Attack</button>
             <button onClick={useItem}>Potion</button>
           </div>
         ) : (
