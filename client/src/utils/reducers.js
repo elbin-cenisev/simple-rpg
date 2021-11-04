@@ -8,12 +8,14 @@ const initialState = {
     name: "Slime",
     maxHP: 20,
     damMod: 1,
+    evasMod: .1,
   },
 
   player: {
     name: "TestGuy",
     maxHP: 100,
     damMod: 1,
+    evasMod: .1,
   },
 
   message: "",

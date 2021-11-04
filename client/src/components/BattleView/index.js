@@ -31,19 +31,22 @@ function BattleView() {
     // Restrict command-bar
     setCommandAvailability(false);
 
-    // Calculate damage
-    let damage = calculateDamage(player.damMod);
+    // Check if enemy will evade this attack. If they do, a message is displayed
+    if (!didEvade(enemy.evasMod, enemy.name)) {
+      // Calculate damage
+      let damage = calculateDamage(player.damMod);
 
-    // Subtract damage from enemy HP
-    setEnemyHP(enemyHP - damage);
+      // Subtract damage from enemy HP
+      setEnemyHP(enemyHP - damage);
 
-    // Show message declaring the amount of damage dealt
-    dispatch({
-      type: CHANGE_MESSAGE,
-      payload: `You dealt ${damage} points of damage to the ${enemy.name}`,
-    })
+      // Show message declaring the amount of damage dealt
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `You dealt ${damage} points of damage to the ${enemy.name}`,
+      })
+    }
 
-    // End the player's turn
+    // End the player's turn regardless of whether it hit or missed
     setPlayerTurn(false);
   }
 
@@ -53,17 +56,20 @@ function BattleView() {
     // Restrict command-bar. Should already be restricted, but just in case
     setCommandAvailability(false);
 
-    // Calculate damage
-    let damage = calculateDamage(enemy.damMod);
+    // Check if enemy will evade this attack. If they do, a message is displayed
+    if (!didEvade(player.evasMod, player.name)) {
+      // Calculate damage
+      let damage = calculateDamage(player.damMod);
 
-    // Subtract from player's HP
-    setPlayerHP(playerHP - damage);
+      // Subtract damage from enemy HP
+      setPlayerHP(playerHP - damage);
 
-    // Display damage dealt
-    dispatch({
-      type: CHANGE_MESSAGE,
-      payload: `The ${enemy.name} hit you for ${damage} damage`,
-    });
+      // Show message declaring the amount of damage dealt
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `${enemy.name} dealt ${damage} points of damage to ${player.name}`,
+      })
+    }
 
     // Toggle turns
     setEnemyTurn(false);
@@ -149,7 +155,27 @@ function BattleView() {
     return (Math.floor(Math.random() * (10 - 1 + 1)) + 1) * modifier;
   }
 
-  // Checks whether player or enemy lost all their health points
+  /* Pure function that returns whether the defender was able to evade the attack */
+  function didEvade(modifier, defender) {
+    console.log(modifier);
+    var diceRoll = Math.random();
+    let chanceToHit = 1 - modifier;
+    console.log(`Chance to hit: ${chanceToHit}, roll: ${diceRoll}`);
+
+    if (diceRoll > chanceToHit) {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `${defender} evaded your attack`,
+      })
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+
+  // Pure function whether the defender lost all their health points
   function checkForDeath(defenderHP) {
     if (defenderHP <= 0) {
       return false;
