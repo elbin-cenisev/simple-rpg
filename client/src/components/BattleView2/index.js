@@ -13,20 +13,17 @@ function BattleView() {
 
     const message = state.message; // The message informing the player of what is going on 
     const enemy = state.enemy;     // The enemy the player is fighting
-    const [enemyHP, setEnemyHP] = useState(enemy.maxHP)
-
-    console.log(enemyHP);
-
-    // Testing vars
-    let commandsAvailable = true; // Determines whether the player can choose an action from the command-bar
     const playerDamMod = 1; // The player's damage modifier (based on Strength)
+
+    const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
+    const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands
 
     // The player decides to make an attack
     function attack() {
       console.log("attack");
 
       // Restrict command-bar
-      commandsAvailable = false;
+      setCommandAvailability(false);
 
       // Calculate damage
       let damage = calculateDamage(playerDamMod);
