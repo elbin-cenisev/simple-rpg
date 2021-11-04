@@ -1,64 +1,95 @@
-import React, { useState } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { CHANGE_MESSAGE } from '../../utils/actions';
 
 
 import './style.css'
 
 function BattleView() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    // Since we manage a lot of states, just subscribe to the entire state
-    let state = useSelector(state => state);
+  // Since we manage a lot of states, just subscribe to the entire state
+  let state = useSelector(state => state);
 
-    const message = state.message; // The message informing the player of what is going on 
-    const enemy = state.enemy;     // The enemy the player is fighting
-    const playerDamMod = 1; // The player's damage modifier (based on Strength)
+  const message = state.message; // The message informing the player of what is going on 
+  const enemy = state.enemy;     // The enemy the player is fighting
+  const playerDamMod = 1; // The player's damage modifier (based on Strength)
+  const playerTurn = true;
 
-    const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
-    const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands
+  const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
+  const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands
 
-    // The player decides to make an attack
-    function attack() {
-      console.log("attack");
+  // The player decides to make an attack
+  function attack() {
+    console.log("attack");
 
-      // Restrict command-bar
-      setCommandAvailability(false);
+    // Restrict command-bar
+    setCommandAvailability(false);
 
-      // Calculate damage
-      let damage = calculateDamage(playerDamMod);
+    // Calculate damage
+    let damage = calculateDamage(playerDamMod);
 
-      // Subtract damage from enemy HP
-      setEnemyHP(enemyHP - damage);
-      console.log(enemyHP);
+    // Subtract damage from enemy HP
+    setEnemyHP(enemyHP - damage);
 
-      // Show message declaring the amount of damage dealt
+    // Show message declaring the amount of damage dealt
+    dispatch({
+      type: CHANGE_MESSAGE,
+      payload: `You dealt ${damage} points of damage to the ${enemy.name}`,
+    })
+  }
+
+  // The player decides to flee
+  function flee() {
+    console.log("flee")
+  }
+
+  // The player decides to use an item (currently only potion)
+  function useItem() {
+    console.log("use potion")
+  }
+
+  // The player clicks the "Continue" button on the message-bar
+  function progressTurn() {
+
+    // Check whether someone died last turn
+    if (isAlive(enemyHP) == false) {
       dispatch({
         type: CHANGE_MESSAGE,
-        payload: `You dealt ${damage} points of damage to the ${enemy.name}`,
+        payload: `You have defeated the ${enemy.name}!!`,
       })
-    }
-  
-    // The player decides to flee
-    function flee() {
-      console.log("flee")
-    }
-  
-    // The player decides to use an item (currently only potion)
-    function useItem() {
-      console.log("use potion")
+      setCommandAvailability(false);
     }
 
-    // The player clicks the "Continue" button on the message-bar
-    function progressTurn() {
-      console.log("Test");
-    }
+    // Check whether it is the player's turn
+    else if (playerTurn) {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `It is your turn!`,
+      })
 
-    /* Pure function that returns product of randomly generated number between 1-10 
-    and either the player's or enemy's damage modifier */
-    function calculateDamage(modifier) {
-      return (Math.floor(Math.random() * (10 - 1 + 1)) + 1) * modifier;
+      setCommandAvailability(true); // If it is, let them choose a command
+      // }
     }
+  }
+
+  /* Pure function that returns product of randomly generated number between 1-10 
+  and either the player's or enemy's damage modifier */
+  function calculateDamage(modifier) {
+    return (Math.floor(Math.random() * (10 - 1 + 1)) + 1) * modifier;
+  }
+
+  // Checks whether player or enemy is dead
+  function isAlive(defenderHP) {
+    console.log(defenderHP);
+    if (defenderHP <= 0) {
+      return false;
+    } else { return true }
+  }
+
+  function endBattle(defender) {
+
+  }
 
   return (
     <div id="battleView">
