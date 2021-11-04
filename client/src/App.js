@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import GameProvider from './utils/GameContext';
 import BattleScreen from './pages/BattleScreen';
+import GameOverScreen from './pages/GameOverScreen';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -38,6 +39,7 @@ function App() {
           <GameProvider>
             <Switch>
               <Route exact path="/" component={BattleScreen} />
+              <Route exact path="/gameover" component={GameOverScreen} />
             </Switch>
           </GameProvider>
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { CHANGE_MESSAGE } from '../../utils/actions';
 
@@ -14,8 +15,9 @@ function BattleView() {
   const message = state.message; // The message informing the player of what is going on 
   const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
-  const playerDamMod = 1; // The player's damage modifier (based on Strength)
-
+  
+  const [endGame, setGameover] = useState(false);
+  const [isAlive, setAliveness] = useState(true);
   const [playerHP, setPlayerHP] = useState(player.maxHP) // Tracks enemy's current HP
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
@@ -29,7 +31,7 @@ function BattleView() {
     setCommandAvailability(false);
 
     // Calculate damage
-    let damage = calculateDamage(playerDamMod);
+    let damage = calculateDamage(player.damMod);
 
     // Subtract damage from enemy HP
     setEnemyHP(enemyHP - damage);
@@ -80,8 +82,12 @@ function BattleView() {
   // The player clicks the "Continue" button on the message-bar
   function progressTurn() {
 
+    if(!isAlive) {
+      setGameover(true);
+    }
+
     // Check whether someone died last turn
-    if (isAlive(enemyHP) == false) {
+    else if (checkAlive(enemyHP) == false) {
       dispatch({
         type: CHANGE_MESSAGE,
         payload: `You have defeated the ${enemy.name}!!`,
@@ -90,13 +96,13 @@ function BattleView() {
       endBattle(enemy);
     }
 
-    else if (isAlive(playerHP) == false) {
+    else if (checkAlive(playerHP) == false) {
       dispatch({
         type: CHANGE_MESSAGE,
         payload: `You have been defeated!!!`,
       })
       setCommandAvailability(false);
-      endBattle(player);
+      setAliveness(false);
     }
 
     // Check whether it is the player's turn
@@ -134,14 +140,14 @@ function BattleView() {
   }
 
   // Checks whether player or enemy is dead
-  function isAlive(defenderHP) {
+  function checkAlive(defenderHP) {
     if (defenderHP <= 0) {
       return false;
     } else { return true }
   }
 
   function endBattle(defeatedCombatant) {
-    
+    setAliveness(false);
   }
 
   return (
@@ -175,6 +181,9 @@ function BattleView() {
         ) : (
           <span>It is not your turn yet</span>
         )}
+        {endGame ? (
+          <Redirect to="/gameover" />
+        ) : console.log("It's not over yet") }
       </div>
     </div>
   );

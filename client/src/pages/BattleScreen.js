@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import BattleView from '../components/BattleView2';
+import BattleView from '../components/BattleView';
 
 function BattleScreen() {
   return (
