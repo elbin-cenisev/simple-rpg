@@ -12,9 +12,11 @@ function BattleView() {
   let state = useSelector(state => state);
 
   const message = state.message; // The message informing the player of what is going on 
+  const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
   const playerDamMod = 1; // The player's damage modifier (based on Strength)
 
+  const [playerHP, setPlayerHP] = useState(player.maxHP) // Tracks enemy's current HP
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
   const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
@@ -22,7 +24,6 @@ function BattleView() {
 
   // The player decides to make an attack
   function playerAttack() {
-    console.log("attack");
 
     // Restrict command-bar
     setCommandAvailability(false);
@@ -46,11 +47,20 @@ function BattleView() {
   // The enemy attacks
   function enemyAttack() {
 
+    // Restrict command-bar. Should already be restricted, but just in case
+    setCommandAvailability(false);
+
+    // Calculate damage
+    let damage = calculateDamage(enemy.damMod);
+
+    // Subtract from player's HP
+    setPlayerHP(playerHP - damage);
+
     // Display damage dealt
     dispatch({
       type: CHANGE_MESSAGE,
-      payload: `The ${enemy.name} hit you for 0 damage`,
-    })
+      payload: `The ${enemy.name} hit you for ${damage} damage`,
+    });
 
     // Toggle turns
     setEnemyTurn(false);
@@ -77,6 +87,16 @@ function BattleView() {
         payload: `You have defeated the ${enemy.name}!!`,
       })
       setCommandAvailability(false);
+      endBattle(enemy);
+    }
+
+    else if (isAlive(playerHP) == false) {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `You have been defeated!!!`,
+      })
+      setCommandAvailability(false);
+      endBattle(player);
     }
 
     // Check whether it is the player's turn
@@ -91,7 +111,7 @@ function BattleView() {
     }
 
     // Check whether it is the enemy's turn
-    else if(enemyTurn) {
+    else if (enemyTurn) {
       enemyAttack()
     }
 
@@ -102,7 +122,7 @@ function BattleView() {
         type: CHANGE_MESSAGE,
         payload: `The ${enemy.name} is getting ready to attack you`,
       })
-      
+
       setEnemyTurn(true);
     }
   }
@@ -115,14 +135,13 @@ function BattleView() {
 
   // Checks whether player or enemy is dead
   function isAlive(defenderHP) {
-    console.log(defenderHP);
     if (defenderHP <= 0) {
       return false;
     } else { return true }
   }
 
-  function endBattle(defender) {
-
+  function endBattle(defeatedCombatant) {
+    
   }
 
   return (
