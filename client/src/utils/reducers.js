@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import {
-  CHANGE_MESSAGE, USE_POTION
+  CHANGE_MESSAGE, USE_POTION, GAIN_LOOT
 } from './actions';
 
 const initialState = {
@@ -9,14 +9,19 @@ const initialState = {
     maxHP: 20,
     damMod: 1,
     evasMod: .1,
+    goldVal: 5,
+    expVal: 10
   },
 
   player: {
     name: "TestGuy",
     maxHP: 100,
+    currentHP: 100,
     damMod: 1,
     evasMod: .1,
-    potions: 5
+    potions: 5,
+    totalEXP: 0,
+    totalGold: 0,
   },
 
   message: "",
@@ -38,12 +43,24 @@ export default function reducer(state = initialState, action) {
           ...state.player,
           potions: action.payload.potions
         },
-        
+
         message: action.payload.message,
-  }
+      }
+
+    case GAIN_LOOT: 
+      return {
+        ...state,
+        player: {
+          ...state.player,
+          gold: action.payload.gold,
+          exp: action.payload.exp,
+          potions: action.payload.potions
+        },
+        message: action.payload.message
+      }
     default:
-  return state;
-}
+      return state;
+  }
 };
 
 export function useProductReducer(initialState) {

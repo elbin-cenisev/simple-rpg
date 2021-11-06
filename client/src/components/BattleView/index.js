@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { CHANGE_MESSAGE, USE_POTION } from '../../utils/actions';
+import { CHANGE_MESSAGE, USE_POTION, GAIN_LOOT } from '../../utils/actions';
 
 
 import './style.css'
@@ -12,10 +12,12 @@ function BattleView() {
   // Since we manage a lot of states, just subscribe to the entire state
   let state = useSelector(state => state);
 
+  let gold = 0;
+  let exp = 0;
+
   const message = state.message; // The message informing the player of what is going on 
   const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
-  const potionNum = state.player.potions  // The amount of potions the player has ready for use
 
   const [endGame, setGameover] = useState(false); // This will only toggle a turn after isPlayerAlive was set to false. Once it toggles, player is redirected to /gameover.
   const [isPlayerAlive, setPlayerAliveness] = useState(true); // This toggles when the player's HP reaches 0 
@@ -25,6 +27,7 @@ function BattleView() {
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
   const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
   const [enemyTurn, setEnemyTurn] = useState(false); // Tracks whether it is the enemy's turn
+  const [levelUp, setLevelUp] = useState(false) // Tracks whether the user has gained enough EXP for a level up
 
   // The player decides to make an attack
   function playerAttack() {
@@ -84,15 +87,21 @@ function BattleView() {
 
   // The player decides to use an item (currently only potion)
   function useItem() {
-    console.log("Potions");
-    if (player.potions > 0) {
-      let restoredHP = 20;
-      let newPotionNum = player.potions - 1;
-      let newHP = playerHP + restoredHP;
 
+    // Only use potion if the user has a potion to use
+    if (player.potions > 0) {
+      let restoredHP = 20;  // The default amount that a potion restores
+      let newPotionNum = player.potions - 1;  // Reduce the amount of potions that the user has
+      let newHP = playerHP + restoredHP;  // Realistically, the user's new HP (but gets adjusted below)
+
+      // A player's HP should never exceed their max HP through potion use
       if (newHP > player.maxHP) {
+
+        // Only restore as much HP as needed to reach the player's maxHP
         restoredHP = player.maxHP - playerHP
         setPlayerHP(player.maxHP);
+
+        // Otherwise, heal for the standard amount
       } else {
         setPlayerHP(newHP);
       }
@@ -104,6 +113,8 @@ function BattleView() {
           potions: newPotionNum
         }
       })
+
+      // If the player has no potions to use, don't adjust any values and just change message
     } else {
       dispatch({
         type: CHANGE_MESSAGE,
@@ -111,6 +122,7 @@ function BattleView() {
       })
     }
 
+    // Regardless, the player's turn ends (harsh, I know, but this makes it easier for now)
     setPlayerTurn(false);
     setCommandAvailability(false);
 
@@ -126,7 +138,42 @@ function BattleView() {
 
     // If the enemy died in the last turn, start tallying experience gains and such
     else if (!isEnemyAlive) {
-      // Calculate gold and experience gains
+      // Give player the gold for killing the enemy
+      let goldGain = enemy.goldVal;
+      let expGain = enemy.expVal;
+      let potionGain = givePotion();
+
+      let totalGold = player.gold + goldGain;
+      let totalEXP = player.exp + expGain;
+      let totalPotions = player.potions + potionGain;
+
+      if (potionGain > 0) {
+        dispatch({
+          type: GAIN_LOOT,
+          payload: {
+            message: `You gained ${goldGain} gold, ${expGain} exp and found ${potionGain} potion(s)`,
+            potions: totalPotions,
+            gold: totalGold,
+            exp: totalEXP
+          }
+        })
+      } else {
+        dispatch({
+          type: GAIN_LOOT,
+          payload: {
+            message: `You gained ${goldGain} gold, ${expGain} exp`,
+            potions: totalPotions,
+            gold: totalGold,
+            exp: totalEXP,
+          }
+        })
+      }
+
+      if(totalEXP > player.maxEXP) {
+        setLevelUp(true);
+      } else {
+        finishBattle()
+      }
     }
 
     // Check if the player lost their HP during this turn. If they did, flip isPlayerAlive so that the next time the Continue is pressed, the game can end.
@@ -202,12 +249,29 @@ function BattleView() {
     }
   }
 
-
-  // Pure function whether the defender lost all their health points
+  // Checks whether the defender lost all their health points
   function checkForDeath(defenderHP) {
     if (defenderHP <= 0) {
       return false;
     } else { return true }
+  }
+
+  // After winning a fight, you get the chance to win potions; this returns how many
+  function givePotion() {
+    // Works exactly like didEvade. There's a 10% chance to get a potion.
+    var diceRoll = Math.random();
+    var chanceForNothing = .9;
+    if (diceRoll > chanceForNothing) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  // Return players to the Inn
+  function finishBattle() {
+    console.log("Battle is finished");
   }
 
   return (
