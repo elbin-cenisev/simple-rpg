@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { CHANGE_MESSAGE } from '../../utils/actions';
+import { CHANGE_MESSAGE, USE_POTION } from '../../utils/actions';
 
 
 import './style.css'
@@ -15,11 +15,12 @@ function BattleView() {
   const message = state.message; // The message informing the player of what is going on 
   const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
+  const potionNum = state.player.potions  // The amount of potions the player has ready for use
 
   const [endGame, setGameover] = useState(false); // This will only toggle a turn after isPlayerAlive was set to false. Once it toggles, player is redirected to /gameover.
   const [isPlayerAlive, setPlayerAliveness] = useState(true); // This toggles when the player's HP reaches 0 
   const [isEnemyAlive, setEnemyAliveness] = useState(true); // This toggles when the enemy's HP reaches 0
-  const [playerHP, setPlayerHP] = useState(player.maxHP) // Tracks enemy's current HP
+  const [playerHP, setPlayerHP] = useState(80) // Tracks enemy's current HP
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
   const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
@@ -83,7 +84,36 @@ function BattleView() {
 
   // The player decides to use an item (currently only potion)
   function useItem() {
-    console.log("use potion")
+    console.log("Potions");
+    if (player.potions > 0) {
+      let restoredHP = 20;
+      let newPotionNum = player.potions - 1;
+      let newHP = playerHP + restoredHP;
+
+      if (newHP > player.maxHP) {
+        restoredHP = player.maxHP - playerHP
+        setPlayerHP(player.maxHP);
+      } else {
+        setPlayerHP(newHP);
+      }
+
+      dispatch({
+        type: USE_POTION,
+        payload: {
+          message: `You used a potion and restored ${restoredHP} HP`,
+          potions: newPotionNum
+        }
+      })
+    } else {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `You don't have any potions left!!!`,
+      })
+    }
+
+    setPlayerTurn(false);
+    setCommandAvailability(false);
+
   }
 
   // The player clicks the "Continue" button on the message-bar. This is where the bulk of the logic happens.
@@ -96,8 +126,6 @@ function BattleView() {
 
     // If the enemy died in the last turn, start tallying experience gains and such
     else if (!isEnemyAlive) {
-      console.log("The enemy is dead");
-
       // Calculate gold and experience gains
     }
 
@@ -155,7 +183,7 @@ function BattleView() {
     return (Math.floor(Math.random() * (10 - 1 + 1)) + 1) * modifier;
   }
 
-  /* Pure function that returns whether the defender was able to evade the attack */
+  /* Returns whether the defender was able to evade the attack */
   function didEvade(modifier, defender) {
     console.log(modifier);
     var diceRoll = Math.random();
@@ -165,7 +193,7 @@ function BattleView() {
     if (diceRoll > chanceToHit) {
       dispatch({
         type: CHANGE_MESSAGE,
-        payload: `${defender} evaded your attack`,
+        payload: `${defender} evaded their attack`,
       })
       return true
     }
@@ -224,8 +252,14 @@ function BattleView() {
         ) : (console.log("It's not over yet"))}
       </div>
 
+      {/* Shows player's current HP */}
       <div id="health-bar">
         {playerHP} / {player.maxHP}
+      </div>
+
+      {/* Shows how many potions the player has in their posession */}
+      <div id="potion-bar">
+        {player.potions}
       </div>
     </div>
   );
