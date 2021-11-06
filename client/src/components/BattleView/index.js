@@ -12,17 +12,15 @@ function BattleView() {
   // Since we manage a lot of states, just subscribe to the entire state
   let state = useSelector(state => state);
 
-  let gold = 0;
-  let exp = 0;
-
   const message = state.message; // The message informing the player of what is going on 
   const player = state.player;  // The player character
   const enemy = state.enemy;     // The enemy the player is fighting
 
-  const [endGame, setGameover] = useState(false); // This will only toggle a turn after isPlayerAlive was set to false. Once it toggles, player is redirected to /gameover.
+  const [gameOver, setGameover] = useState(false); // This will only toggle a turn after isPlayerAlive was set to false. Once it toggles, player is redirected to /gameover.
+  const [finished, setFinished] = useState(false); // This will only toggle a turn after isEnemyAlive was set to false. Once it toggles, player is redirected to /preparationScreen.
   const [isPlayerAlive, setPlayerAliveness] = useState(true); // This toggles when the player's HP reaches 0 
   const [isEnemyAlive, setEnemyAliveness] = useState(true); // This toggles when the enemy's HP reaches 0
-  const [playerHP, setPlayerHP] = useState(80) // Tracks enemy's current HP
+  const [playerHP, setPlayerHP] = useState(player.maxHP) // Tracks enemy's current HP
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
   const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
@@ -128,15 +126,16 @@ function BattleView() {
 
   }
 
-  // The player clicks the "Continue" button on the message-bar. This is where the bulk of the logic happens.
+  /* The player clicks the "Continue" button on the message-bar. This is where the bulk of the logic happens. 
+  Do not change the order in which the checks are handled; it's based on priority. */
   function progressTurn() {
 
-    // If the player died in the last turn, the game is over
-    if (!isPlayerAlive) {
+    // If the battle is finished(either due to the player or enemy dying), flip the switch to redirect to an appropriate screen
+    if(finished) {
       setGameover(true);
     }
 
-    // If the enemy died in the last turn, start tallying experience gains and such
+    // If the enemy died in the last turn, start tallying experience gains and such. 
     else if (!isEnemyAlive) {
       // Give player the gold for killing the enemy
       let goldGain = enemy.goldVal;
@@ -169,14 +168,14 @@ function BattleView() {
         })
       }
 
-      if(totalEXP > player.maxEXP) {
+      if (totalEXP > player.maxEXP) {
         setLevelUp(true);
       } else {
-        finishBattle()
+        setFinished(true);
       }
     }
 
-    // Check if the player lost their HP during this turn. If they did, flip isPlayerAlive so that the next time the Continue is pressed, the game can end.
+    // Check if the player lost their HP during this turn. If they did, prepare for GameOver redirection.
     else if (checkForDeath(playerHP) == false) {
       dispatch({
         type: CHANGE_MESSAGE,
@@ -184,6 +183,7 @@ function BattleView() {
       })
       setCommandAvailability(false);
       setPlayerAliveness(false);
+      setFinished(true);
     }
 
     // Check whether enemy's HP has reached 0. If it has, toggle the flag to make image disappear. Next time Continue is pressed, it'll calculate gold and exp gains.
@@ -269,11 +269,6 @@ function BattleView() {
     }
   }
 
-  // Return players to the Inn
-  function finishBattle() {
-    console.log("Battle is finished");
-  }
-
   return (
     <div id="battleView">
 
@@ -293,9 +288,7 @@ function BattleView() {
         {/* If enemy is alive, show their picture */}
         {isEnemyAlive ? (
           <img src={'./images/slime.png'} />
-        ) : (
-          console.log("The enemy is dead")
-        )}
+        ) : (null)}
       </div>
 
       {/* The command-bar shows all the commands a player can make durin their turn */}
@@ -311,9 +304,12 @@ function BattleView() {
         ) : (
           <span>It is not your turn yet</span>
         )}
-        {endGame ? (
+        {gameOver & isEnemyAlive ? (
           <Redirect to="/gameover" />
-        ) : (console.log("It's not over yet"))}
+        ) : (null)}
+        {gameOver & isPlayerAlive ? (
+          <Redirect to="/preparationScreen" />
+        ) : (null)}
       </div>
 
       {/* Shows player's current HP */}
@@ -323,7 +319,7 @@ function BattleView() {
 
       {/* Shows how many potions the player has in their posession */}
       <div id="potion-bar">
-        {player.potions}
+        {player.potions} Potions
       </div>
     </div>
   );
