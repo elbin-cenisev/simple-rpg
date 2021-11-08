@@ -17,6 +17,7 @@ function CityView() {
 
   const [storeVisit, setStoreVisit] = useState(false);
   const [innVisit, setInnVisit] = useState(false);
+  const [leaveCity, setLeaveCity] = useState(false);
 
   function visitStore() {
     setStoreVisit(true);
@@ -24,6 +25,10 @@ function CityView() {
 
   function visitInn() {
     setInnVisit(true);
+  }
+
+  function goOut() {
+    setLeaveCity(true);
   }
 
   useEffect(() => {
@@ -52,6 +57,7 @@ function CityView() {
         <div id="actions">
           <button onClick={visitStore}>Go to Store</button>
           <button onClick={visitInn}>Go to Rest</button>
+          <button onClick={goOut}>Leave City</button>
         </div>
       </div>
 
@@ -70,6 +76,9 @@ function CityView() {
       ) : (null)}
       {innVisit ? (
         <Redirect to="/inn" />
+      ) : (null)}
+      {leaveCity ? (
+        <Redirect to="/battle" />
       ) : (null)}
 
     </div>
