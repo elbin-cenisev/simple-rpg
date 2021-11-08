@@ -321,6 +321,11 @@ function BattleView() {
       <div id="potion-bar">
         {player.potions} Potions
       </div>
+
+      {/* Shows how many potions the player has in their posession */}
+      <div id="gold-bar">
+        {player.totalGold} Gold
+      </div>
     </div>
   );
 };

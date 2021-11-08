@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { CHANGE_MESSAGE } from '../../utils/actions';
+import { CHANGE_MESSAGE, REST } from '../../utils/actions';
 
 import './style.css'
 
@@ -16,13 +16,22 @@ function InnView() {
   const message = state.message;  // The message that informs players of what is going on
 
   const [cityVisit, setCityVisit] = useState(false);
+  const [rested, setRest] = useState(false);
 
   function returnToCity() {
     setCityVisit(true);
   }
 
   function restInn() {
-    
+    dispatch({
+      type: REST,
+      payload: {
+        gold: player.totalGold - 50,
+        hp: player.maxHP,
+        message: "You restored your HP",
+      }
+    });
+    setRest(true);
   }
 
   useEffect(() => {
@@ -50,7 +59,9 @@ function InnView() {
       <div id="command-bar">
         <div id="actions">
           <button onClick={returnToCity}>Leave Store</button>
-          <button onClick={restInn}>Rest</button>
+          {rested ? (null) : (
+            <button onClick={restInn}>Rest</button>
+          )}
         </div>
       </div>
 
@@ -59,11 +70,16 @@ function InnView() {
         {player.currentHP} / {player.maxHP}
       </div>
 
+      <div id="gold-bar">
+        {player.totalGold} Gold
+      </div>
+
       {/* Shows how many potions the player has in their posession */}
       <div id="potion-bar">
         {player.potions} Potions
       </div>
 
+      {/* Shows how much gold the player has in their posession */}
       {cityVisit ? (
         <Redirect to="/city" />
       ) : (null)}
