@@ -10,6 +10,8 @@ function CityView() {
   // Since we manage a lot of states, just subscribe to the entire state
   let state = useSelector(state => state);
 
+  const dispatch = useDispatch();
+
   const player = state.player;  // The player character
   const message = state.message;  // The message that informs players of what is going on
 
@@ -24,9 +26,16 @@ function CityView() {
     setInnVisit(true);
   }
 
+  useEffect(() => {
+    dispatch({
+      type: CHANGE_MESSAGE,
+      payload: `Where do you want to go?`,
+    })
+  }, []);
+
   return (
 
-    <div id="preparationView">
+    <div id="cityView">
 
       {/* The message-bar displays what is currently going on */}
       <div id="message-bar">

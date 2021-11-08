@@ -43,7 +43,7 @@ function InnView() {
 
   return (
 
-    <div id="preparationView">
+    <div id="innView">
 
       {/* The message-bar displays what is currently going on */}
       <div id="message-bar">
@@ -51,14 +51,14 @@ function InnView() {
       </div>
 
       {/* The city-window just shows an image of the inn you are in */}
-      <div id="city-window">
+      <div id="inn-window">
 
       </div>
 
       {/* The command-bar shows what the player can do */}
       <div id="command-bar">
         <div id="actions">
-          <button onClick={returnToCity}>Leave Store</button>
+          <button onClick={returnToCity}>Leave</button>
           {rested ? (null) : (
             <button onClick={restInn}>Rest</button>
           )}
