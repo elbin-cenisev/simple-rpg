@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { CHANGE_MESSAGE, USE_POTION, GAIN_LOOT } from '../../utils/actions';
+import { CHANGE_MESSAGE, USE_POTION, GAIN_LOOT, ADJUST_HP } from '../../utils/actions';
 
 
 import './style.css'
@@ -20,7 +20,6 @@ function BattleView() {
   const [finished, setFinished] = useState(false); // This will only toggle a turn after isEnemyAlive was set to false. Once it toggles, player is redirected to /preparationScreen.
   const [isPlayerAlive, setPlayerAliveness] = useState(true); // This toggles when the player's HP reaches 0 
   const [isEnemyAlive, setEnemyAliveness] = useState(true); // This toggles when the enemy's HP reaches 0
-  const [playerHP, setPlayerHP] = useState(player.maxHP) // Tracks enemy's current HP
   const [enemyHP, setEnemyHP] = useState(enemy.maxHP) // Tracks enemy's current HP
   const [commandsAvailable, setCommandAvailability] = useState(true); // Tracks whether user can use commands (does not mean it is their turn)
   const [playerTurn, setPlayerTurn] = useState(true); // Tracks whether it is the player's turn
@@ -60,11 +59,16 @@ function BattleView() {
 
     // Check if enemy will evade this attack. If they do, a message is displayed
     if (!didEvade(player.evasMod, player.name)) {
+
       // Calculate damage
-      let damage = calculateDamage(player.damMod);
+      let damage = calculateDamage(enemy.damMod);
+      let newHP = player.currentHP - damage;
 
       // Subtract damage from enemy HP
-      setPlayerHP(playerHP - damage);
+      dispatch({
+        type: ADJUST_HP,
+        payload: newHP,
+      })
 
       // Show message declaring the amount of damage dealt
       dispatch({
@@ -90,18 +94,26 @@ function BattleView() {
     if (player.potions > 0) {
       let restoredHP = 20;  // The default amount that a potion restores
       let newPotionNum = player.potions - 1;  // Reduce the amount of potions that the user has
-      let newHP = playerHP + restoredHP;  // Realistically, the user's new HP (but gets adjusted below)
+      let newHP = player.currentHP + restoredHP;  // Realistically, the user's new HP (but gets adjusted below)
 
       // A player's HP should never exceed their max HP through potion use
       if (newHP > player.maxHP) {
 
         // Only restore as much HP as needed to reach the player's maxHP
-        restoredHP = player.maxHP - playerHP
-        setPlayerHP(player.maxHP);
+        restoredHP = player.maxHP - player.currentHP;
+
+        dispatch({
+          type: ADJUST_HP,
+          payload: player.maxHP,
+        })
 
         // Otherwise, heal for the standard amount
       } else {
-        setPlayerHP(newHP);
+        // Subtract damage from enemy HP
+        dispatch({
+          type: ADJUST_HP,
+          payload: newHP,
+        })
       }
 
       dispatch({
@@ -131,7 +143,7 @@ function BattleView() {
   function progressTurn() {
 
     // If the battle is finished(either due to the player or enemy dying), flip the switch to redirect to an appropriate screen
-    if(finished) {
+    if (finished) {
       setGameover(true);
     }
 
@@ -142,8 +154,8 @@ function BattleView() {
       let expGain = enemy.expVal;
       let potionGain = givePotion();
 
-      let totalGold = player.gold + goldGain;
-      let totalEXP = player.exp + expGain;
+      let totalGold = player.totalGold + goldGain;
+      let totalEXP = player.totalExp + expGain;
       let totalPotions = player.potions + potionGain;
 
       if (potionGain > 0) {
@@ -176,7 +188,7 @@ function BattleView() {
     }
 
     // Check if the player lost their HP during this turn. If they did, prepare for GameOver redirection.
-    else if (checkForDeath(playerHP) == false) {
+    else if (checkForDeath(player.currentHP) == false) {
       dispatch({
         type: CHANGE_MESSAGE,
         payload: `You have been defeated!!!`,
@@ -269,6 +281,13 @@ function BattleView() {
     }
   }
 
+  useEffect(() => {
+    dispatch({
+      type: CHANGE_MESSAGE,
+      payload: `A ${enemy.name} has appeared!`,
+    })
+  }, []);
+
   return (
     <div id="battleView">
 
@@ -308,13 +327,13 @@ function BattleView() {
           <Redirect to="/gameover" />
         ) : (null)}
         {gameOver & isPlayerAlive ? (
-          <Redirect to="/preparationScreen" />
+          <Redirect to="/city" />
         ) : (null)}
       </div>
 
       {/* Shows player's current HP */}
       <div id="health-bar">
-        {playerHP} / {player.maxHP}
+        {player.currentHP} / {player.maxHP}
       </div>
 
       {/* Shows how many potions the player has in their posession */}
@@ -322,7 +341,7 @@ function BattleView() {
         {player.potions} Potions
       </div>
 
-      {/* Shows how many potions the player has in their posession */}
+      {/* Shows how gold is in the player's possession' */}
       <div id="gold-bar">
         {player.totalGold} Gold
       </div>
