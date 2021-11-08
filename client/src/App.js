@@ -12,6 +12,8 @@ import GameProvider from './utils/GameContext';
 import BattleScreen from './pages/BattleScreen';
 import GameOverScreen from './pages/GameOverScreen';
 import CityScreen from './pages/CityScreen';
+import StoreScreen from './pages/StoreScreen';
+import InnScreen from './pages/InnScreen';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -43,6 +45,8 @@ function App() {
               <Route exact path="/gameover" component={GameOverScreen} />
               <Route exact path="/battle" component={BattleScreen} />
               <Route exact path="/city" component={CityScreen} />
+              <Route exact path="/store" component={StoreScreen} />
+              <Route exact path="/inn" component={InnScreen} />
             </Switch>
           </GameProvider>
         </div>

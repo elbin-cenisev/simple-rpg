@@ -1,0 +1,32 @@
+#city-window {
+    height: 400px;
+    width: 400px;
+    background:url("./background.jpg");
+    background-repeat: no-repeat;
+    border: 1px solid black;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+}
+
+#command-bar {
+    width: 400px;
+    margin-top:10px;
+    text-align: center;
+}
+
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#message-bar {
+    width: 400px;
+    text-align: center;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
