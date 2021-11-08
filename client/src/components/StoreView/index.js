@@ -22,14 +22,21 @@ function StoreView() {
   }
 
   function sellItem() {
-    dispatch({
-      type: BUY_POTION,
-      payload: {
-        gold: player.totalGold - 50,
-        potions: player.potions + 1,
-        message: "Thank you!",
-      }
-    });
+    if (player.totalGold < 50) {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `Sorry, you need more money`,
+      });
+    } else {
+      dispatch({
+        type: BUY_POTION,
+        payload: {
+          gold: player.totalGold - 50,
+          potions: player.potions + 1,
+          message: "Thank you!",
+        }
+      });
+    }
   }
 
   useEffect(() => {

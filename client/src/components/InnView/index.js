@@ -23,15 +23,22 @@ function InnView() {
   }
 
   function restInn() {
-    dispatch({
-      type: REST,
-      payload: {
-        gold: player.totalGold - 50,
-        hp: player.maxHP,
-        message: "You restored your HP",
-      }
-    });
-    setRest(true);
+    if (player.totalGold < 50) {
+      dispatch({
+        type: CHANGE_MESSAGE,
+        payload: `Sorry, you need more money`,
+      });
+    } else {
+      dispatch({
+        type: REST,
+        payload: {
+          gold: player.totalGold - 50,
+          hp: player.maxHP,
+          message: "You restored your HP",
+        }
+      });
+      setRest(true);
+    }
   }
 
   useEffect(() => {
