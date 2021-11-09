@@ -9,14 +9,21 @@ function CreationView() {
   const dispatch = useDispatch();
   const player = useSelector(state => state.player);
 
+  // Available points to distribute
   const [points, setPoints] = useState(5);
+
+  // Base statistics for character
   const [strength, setStrength] = useState(0);
   const [agility, setAgility] = useState(0);
   const [endurance, setEndurance] = useState(0);
 
+  // Derived statistics for character
+  let maxHP = 20 + (4 * endurance);
+  let damMod = 1 + (0.2 * strength);
+  let evaMod = 0.05 + (0.05 * agility);
+
   return (
     <div id="creationView">
-
       {/* The message-bar displays what is currently going on */}
       <div id="statistics">
         <div id="availablePoints">
@@ -79,25 +86,36 @@ function CreationView() {
             }
           }}>Decrease</button>
         </div>
-
-        <button onClick={() => {
-          if (points == 0) {
-            dispatch({ 
-              type: SET_STATISTICS, 
-              payload: {
-                strength: strength,
-                agility: agility,
-                endurance: endurance,
-              } 
-            })
-          } else if(points > 0) {
-            alert("Please distribute all your points first!")
-          } 
-          console.log(player.statistics);
-        }}>Create your Character
-        </button>
       </div>
-    </div >
+
+      <div id="derivedStats">
+        <p>Maximum HP: {maxHP}</p>
+        <p>Evasion Modifier: {Math.round(evaMod * 100)}%</p>
+        <p>Damage Modifier: {damMod * 100}%</p>
+      </div>
+
+      <button onClick={() => {
+        if (points == 0) {
+          dispatch({
+            type: SET_STATISTICS,
+            payload: {
+              strength: strength,
+              agility: agility,
+              endurance: endurance,
+              maxHP: maxHP,
+              damMod: damMod,
+              evaMod: evaMod,
+            }
+          });
+        } else if (points > 0) {
+          alert("Please distribute all your points first!");
+        }
+      }}>Create your Character
+      </button>
+
+      <button onClick={() => console.log(player)}>SHOW ME
+      </button>
+    </div>
   );
 };
 
