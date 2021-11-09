@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { SET_STATISTICS } from '../../utils/actions';
-
+import { Redirect } from 'react-router-dom'
 
 import './style.css'
 
 function CreationView() {
   const dispatch = useDispatch();
-  const player = useSelector(state => state.player);
+
+  // Boolean that tracks whether character creation is finished
+  const [finished, setFinished] = useState(false);
 
   // Available points to distribute
   const [points, setPoints] = useState(5);
@@ -107,14 +109,20 @@ function CreationView() {
               evaMod: evaMod,
             }
           });
+
+          setFinished(true);
+
         } else if (points > 0) {
           alert("Please distribute all your points first!");
         }
       }}>Create your Character
       </button>
 
-      <button onClick={() => console.log(player)}>SHOW ME
-      </button>
+      {finished ? (
+        <Redirect to="/city" />
+      ) : (null)}
+
+      
     </div>
   );
 };
