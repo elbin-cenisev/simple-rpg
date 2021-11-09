@@ -42,6 +42,7 @@ export default function reducer(state = initialState, action) {
       player: {
         ...state.player,
         maxHP: action.payload.maxHP,
+        currentHP: action.payload.maxHP,
         damMod: action.payload.damMod,
         evaMod: action.payload.evaMod,
         statistics: {
