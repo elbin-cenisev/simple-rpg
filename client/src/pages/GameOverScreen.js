@@ -4,7 +4,7 @@ function GameOverScreen() {
   return (
     <>
       <div>
-        <h1>GAME OVER YEAAAAAAAAAAh</h1>
+        <h1>GAME OVER</h1>
       </div>
     </>
   );
