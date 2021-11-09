@@ -239,7 +239,7 @@ function BattleView() {
   /* Pure function that returns the product of randomly generated number between 1-10 
   and the attacker's damage modifier */
   function calculateDamage(modifier) {
-    return (Math.floor(Math.random() * (10 - 1 + 1)) + 1) * modifier;
+    return (Math.round(Math.random() * (10 - 1 + 1)) + 1) * modifier;
   }
 
   /* Returns whether the defender was able to evade the attack */
