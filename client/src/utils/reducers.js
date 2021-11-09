@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import {
-  CHANGE_MESSAGE, USE_POTION, BUY_POTION, GAIN_LOOT, REST, ADJUST_HP
+  CHANGE_MESSAGE, USE_POTION, BUY_POTION, GAIN_LOOT, REST, ADJUST_HP, SET_STATISTICS
 } from './actions';
 
 const initialState = {
@@ -22,6 +22,11 @@ const initialState = {
     potions: 5,
     totalEXP: 0,
     totalGold: 100,
+    statistics: {
+      strength: 0,
+      agility: 0,
+      endurance: 0,
+    }
   },
 
   message: "",
@@ -30,6 +35,21 @@ const initialState = {
 // The reducer is a function that accepts the current state and an action. It returns a new state based on that action.
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
+    case SET_STATISTICS: 
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        statistics: {
+          ...state.player.statistics,
+          strength: action.payload.strength,
+          agility: action.payload.agility,
+          endurance: action.payload.endurance,
+        }
+      }
+    }
+
     case CHANGE_MESSAGE:
       return {
         ...state,
