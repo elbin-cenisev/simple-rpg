@@ -52,12 +52,12 @@ const resolvers = {
           evaMod,
         });
 
-        console.log(character);
-
-        await User.findOneAndUpdate(
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { characters: character._id } }
+          { $addToSet: { characters: character } }
         );
+
+        console.log(user);
 
         return character;
       }
