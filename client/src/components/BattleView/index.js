@@ -58,7 +58,7 @@ function BattleView() {
     setCommandAvailability(false);
 
     // Check if enemy will evade this attack. If they do, a message is displayed
-    if (!didEvade(player.evasMod, player.name)) {
+    if (!didEvade(player.evaMod, player.name)) {
 
       // Calculate damage
       let damage = calculateDamage(enemy.damMod);
@@ -73,7 +73,7 @@ function BattleView() {
       // Show message declaring the amount of damage dealt
       dispatch({
         type: CHANGE_MESSAGE,
-        payload: `${enemy.name} dealt ${damage} points of damage to ${player.name}`,
+        payload: `${enemy.name} dealt ${damage} points of damage to ${player.characterName}`,
       })
     }
 
@@ -239,7 +239,10 @@ function BattleView() {
   /* Pure function that returns the product of randomly generated number between 1-10 
   and the attacker's damage modifier */
   function calculateDamage(modifier) {
-    return (Math.round(Math.random() * (10 - 1 + 1)) + 1) * modifier;
+    let diceRoll = Math.floor(Math.random() * 10) + 1;
+    console.log(`diceRoll: ${diceRoll}`);
+    let damage = diceRoll * modifier;
+    return damage;
   }
 
   /* Returns whether the defender was able to evade the attack */
