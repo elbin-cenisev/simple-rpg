@@ -56,7 +56,7 @@ function CityView() {
       <div id="command-bar">
         <div id="actions">
           <button onClick={visitStore}>Go to Store</button>
-          <button onClick={visitInn}>Go to Rest</button>
+          <button onClick={visitInn}>Go to Inn</button>
           <button onClick={goOut}>Leave City</button>
         </div>
       </div>

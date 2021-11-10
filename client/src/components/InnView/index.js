@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { CHANGE_MESSAGE, REST } from '../../utils/actions';
+import { useMutation } from '@apollo/client';
+
+import { SAVE_CHARACTER } from '../../utils/mutations';
 
 import './style.css'
 
@@ -9,6 +12,8 @@ function InnView() {
 
   // Since we manage a lot of states, just subscribe to the entire state
   let state = useSelector(state => state);
+
+  const [save] = useMutation(SAVE_CHARACTER);
 
   const dispatch = useDispatch();
 
@@ -41,6 +46,24 @@ function InnView() {
     }
   }
 
+  async function saveCharacter() {
+    try {
+      const { data } = await saveCharacter({
+        variables: {
+          strength: player.strength,
+          agility: player.agility,
+          endurance: player.endurance,
+          maxHP: player.maxHP,
+          currentHP: player.maxHP,
+          damMod: player.damMod,
+          evaMod: player.evaMod,
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     dispatch({
       type: CHANGE_MESSAGE,
@@ -69,6 +92,7 @@ function InnView() {
           {rested ? (null) : (
             <button onClick={restInn}>Rest</button>
           )}
+          <button onClick={saveCharacter}>Save</button>
         </div>
       </div>
 

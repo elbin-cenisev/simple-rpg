@@ -30,6 +30,15 @@ function CreationView() {
 
   const [createCharacter] = useMutation(CREATE_CHARACTER);
 
+  const [formState, setFormState] = useState({ characterName: '' });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
   async function handleFormSubmit(event) {
     event.preventDefault();
@@ -44,6 +53,7 @@ function CreationView() {
       dispatch({
         type: SET_STATISTICS,
         payload: {
+          characterName: formState.characterName,
           strength: strength,
           agility: agility,
           endurance: endurance,
@@ -56,6 +66,7 @@ function CreationView() {
       try {
         const { data } = await createCharacter({
           variables: {
+            characterName: formState.characterName,
             strength: strength,
             agility: agility,
             endurance: endurance,
@@ -79,7 +90,15 @@ function CreationView() {
 
   return (
     <div id="creationView">
-      {/* The message-bar displays what is currently going on */}
+      <div id="characterName">
+        <input
+          placeholder="Your character's name"
+          name="characterName"
+          type="text"
+          id="characterName"
+          onChange={handleChange}
+        />
+      </div>
       <div id="statistics">
         <div id="availablePoints">
           Available Points: {points}

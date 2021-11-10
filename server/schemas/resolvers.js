@@ -38,16 +38,50 @@ const resolvers = {
 
       return { token, user };
     },
-    createCharacter: async (parent, { strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
-      try {
-        const updatedUser = await User.findOneAndUpdate(
+    createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
+      if (context.user) {
+        const character = await Player.create({
+          characterName,
+          strength,
+          agility,
+          endurance,
+          maxHP,
+          currentHP,
+          damMod,
+          evaMod,
+        });
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { playerCharacters: { strength, agility, endurance, maxHP, currentHP, damMod, evaMod } } },
-          { new: true, runValidators: true }
+          { $addToSet: { characters: character._id } }
         );
-        return updatedUser;
-      } catch (err) {
-        console.log(err);
+
+        return character;
+      }
+      throw new AuthenticationError('You need to be logged in!'); 
+    },
+    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
+      if (context.user) {
+        Player.findOneAndUpdate(
+          { characterName: characterName },
+          {
+            $set:
+            {
+              strength: strength,
+              agility: agility,
+              endurance: endurance,
+              maxHP: maxHP,
+              currentHP: currentHP,
+              damMod: damMod,
+              evaMod: evaMod,
+            }
+          },
+          { new: true }, (err, doc) => {
+            if (err) {
+              console.log("Something wrong when updating data!");
+            }
+            console.log(doc);
+          });
       }
     },
   }

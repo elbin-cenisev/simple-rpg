@@ -1,6 +1,11 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const playerSchema = new Schema({
+    characterName: {
+        type:String,
+        required: true
+    },
     strength: {
         type: Number,
         required: true
@@ -32,4 +37,6 @@ const playerSchema = new Schema({
 
 });
 
-module.exports = playerSchema;
+const Player = mongoose.model('Player', playerSchema);
+
+module.exports = Player;

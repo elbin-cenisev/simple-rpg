@@ -34,6 +34,7 @@ export const ADD_USER = gql`
 
 export const CREATE_CHARACTER = gql`
   mutation createCharacter(
+    $characterName: String!
     $strength: Int!
     $agility: Int!
     $endurance: Int!
@@ -43,6 +44,7 @@ export const CREATE_CHARACTER = gql`
     $evaMod: Float!
   ) {
     createCharacter(
+      characterName: $characterName
       strength: $strength
       agility: $agility
       endurance: $endurance
@@ -56,6 +58,48 @@ export const CREATE_CHARACTER = gql`
       lastName
       email
       playerCharacters {
+        _id
+        characterName
+        strength
+        agility
+        endurance
+        maxHP
+        currentHP
+        damMod
+        evaMod
+      }
+    }
+  }
+`
+
+export const SAVE_CHARACTER = gql`
+  mutation saveCharacter(
+    $characterName: String!
+    $strength: Int!
+    $agility: Int!
+    $endurance: Int!
+    $maxHP: Int!
+    $currentHP: Int!
+    $damMod: Float!
+    $evaMod: Float!
+  ) {
+    saveCharacter(
+      characterName: $characterName
+      strength: $strength
+      agility: $agility
+      endurance: $endurance
+      maxHP: $maxHP
+      currentHP: $currentHP
+      damMod: $damMod
+      evaMod: $evaMod
+    ) {
+      _id
+      firstName
+      lastName
+      email
+      playerCharacters {
+        _id
+        characterName
         strength
         agility
         endurance

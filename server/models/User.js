@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
-const playerSchema = require('./Player');
-
 const userSchema = new Schema(
   {
     firstName: {
@@ -27,13 +25,13 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    playerCharacters: [playerSchema],
+    characters: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Player',
+      },
+    ],
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
 );
 
 // set up pre-save middleware to create password
