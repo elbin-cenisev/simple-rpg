@@ -17,6 +17,7 @@ import InnScreen from './pages/InnScreen';
 import CreationScreen from './pages/CharacterCreationScreen';
 import LoginScreen from './pages/LoginScreen';
 import SignupScreen from './pages/SignupScreen';
+import SelectScreen from './pages/CharacterSelectScreen';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -52,6 +53,7 @@ function App() {
               <Route exact path="/city" component={CityScreen} />
               <Route exact path="/store" component={StoreScreen} />
               <Route exact path="/inn" component={InnScreen} />
+              <Route exact path="/select" component={SelectScreen} />
               <Route exact path="/createCharacter" component={CreationScreen} />
             </Switch>
           </GameProvider>
