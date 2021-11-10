@@ -58,6 +58,7 @@ function CreationView() {
           agility: agility,
           endurance: endurance,
           maxHP: maxHP,
+          currentHP: maxHP,
           damMod: damMod,
           evaMod: evaMod,
         }

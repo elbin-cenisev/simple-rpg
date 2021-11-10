@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const playerSchema = new Schema({
     characterName: {
@@ -37,6 +36,6 @@ const playerSchema = new Schema({
 
 });
 
-const Player = mongoose.model('Player', playerSchema);
+const Player = model('Player', playerSchema);
 
 module.exports = Player;

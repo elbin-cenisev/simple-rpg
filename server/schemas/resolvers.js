@@ -39,6 +39,7 @@ const resolvers = {
       return { token, user };
     },
     createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
+      console.log(characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod);
       if (context.user) {
         const character = await Player.create({
           characterName,
@@ -50,6 +51,8 @@ const resolvers = {
           damMod,
           evaMod,
         });
+
+        console.log(character);
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
