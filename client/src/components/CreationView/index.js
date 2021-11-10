@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import { Redirect } from 'react-router-dom';
+
 import { SET_STATISTICS } from '../../utils/actions';
-import { Redirect } from 'react-router-dom'
+import { CREATE_CHARACTER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 import './style.css'
 
@@ -23,6 +27,55 @@ function CreationView() {
   let maxHP = 20 + (4 * endurance);
   let damMod = 1 + (0.2 * strength);
   let evaMod = 0.05 + (0.05 * agility);
+
+  const [createCharacter] = useMutation(CREATE_CHARACTER);
+
+
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    if (points == 0) {
+      dispatch({
+        type: SET_STATISTICS,
+        payload: {
+          strength: strength,
+          agility: agility,
+          endurance: endurance,
+          maxHP: maxHP,
+          damMod: damMod,
+          evaMod: evaMod,
+        }
+      });
+
+      try {
+        const { data } = await createCharacter({
+          variables: {
+            strength: strength,
+            agility: agility,
+            endurance: endurance,
+            maxHP: maxHP,
+            currentHP: maxHP,
+            damMod: damMod,
+            evaMod: evaMod,
+          }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+
+      setFinished(true);
+    }
+
+    else if (points > 0) {
+      alert("Please distribute all your points first!");
+    }
+  }
 
   return (
     <div id="creationView">
@@ -96,33 +149,13 @@ function CreationView() {
         <p>Damage Modifier: {damMod * 100}%</p>
       </div>
 
-      <button onClick={() => {
-        if (points == 0) {
-          dispatch({
-            type: SET_STATISTICS,
-            payload: {
-              strength: strength,
-              agility: agility,
-              endurance: endurance,
-              maxHP: maxHP,
-              damMod: damMod,
-              evaMod: evaMod,
-            }
-          });
-
-          setFinished(true);
-
-        } else if (points > 0) {
-          alert("Please distribute all your points first!");
-        }
-      }}>Create your Character
-      </button>
+      <button onClick={handleFormSubmit}>Create your Character</button>
 
       {finished ? (
         <Redirect to="/city" />
       ) : (null)}
 
-      
+
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { } from 'react';
+import Header from '../components/Header';
 import CreationView from '../components/CreationView';
 
 function CharacterCreationScreen() {
@@ -6,7 +7,8 @@ function CharacterCreationScreen() {
     <>
       <div>
         <h1>CharacterCreationScreen</h1>
-          <CreationView />
+        <Header />
+        <CreationView />
       </div>
     </>
   );

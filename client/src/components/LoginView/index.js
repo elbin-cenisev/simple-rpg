@@ -10,7 +10,7 @@ import Auth from '../../utils/auth';
 import './style.css'
 
 function LoginView() {
-  
+
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
 
@@ -70,6 +70,11 @@ function LoginView() {
           <button type="submit">Submit</button>
         </div>
       </form>
+
+      {Auth.loggedIn() ? (
+          <Redirect to="/createCharacter" />
+          ) : (null)}
+
     </div>
   );
 }

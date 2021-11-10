@@ -6,6 +6,20 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
+    password: String
+    playerCharacters: [Player]
+  }
+
+  type Player {
+    _id: ID
+    name: String!
+    strength: Int!
+    agility: Int!
+    endurance: Int!
+    maxHP: Int!
+    currentHP: Int!
+    damMod: Float!
+    evaMod: Float!
   }
 
   type Checkout {
@@ -24,6 +38,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    createCharacter(strength: Int!, agility: Int!, endurance: Int!, maxHP: Int!, currentHP: Int!, damMod: Float!, evaMod: Float!): User
   }
 `;
 

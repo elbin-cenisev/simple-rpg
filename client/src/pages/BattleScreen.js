@@ -1,5 +1,6 @@
 import React, { } from 'react';
 import BattleView from '../components/BattleView';
+import Header from '../components/Header';
 
 function BattleScreen() {
   return (

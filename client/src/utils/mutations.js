@@ -31,3 +31,39 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const CREATE_CHARACTER = gql`
+  mutation createCharacter(
+    $strength: Int!
+    $agility: Int!
+    $endurance: Int!
+    $maxHP: Int!
+    $currentHP: Int!
+    $damMod: Float!
+    $evaMod: Float!
+  ) {
+    createCharacter(
+      strength: $strength
+      agility: $agility
+      endurance: $endurance
+      maxHP: $maxHP
+      currentHP: $currentHP
+      damMod: $damMod
+      evaMod: $evaMod
+    ) {
+      _id
+      firstName
+      lastName
+      email
+      playerCharacters {
+        strength
+        agility
+        endurance
+        maxHP
+        currentHP
+        damMod
+        evaMod
+      }
+    }
+  }
+`

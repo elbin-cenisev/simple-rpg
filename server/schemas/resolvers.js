@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Player } = require('../models');
 const { signToken } = require('../utils/auth');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
@@ -38,7 +37,19 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    createCharacter: async (parent, { strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
+      try {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { playerCharacters: { strength, agility, endurance, maxHP, currentHP, damMod, evaMod } } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   }
 };
 
