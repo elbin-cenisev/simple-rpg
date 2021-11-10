@@ -241,7 +241,7 @@ function BattleView() {
   function calculateDamage(modifier) {
     let diceRoll = Math.floor(Math.random() * 10) + 1;
     console.log(`diceRoll: ${diceRoll}`);
-    let damage = diceRoll * modifier;
+    let damage = Math.round(diceRoll * modifier);
     return damage;
   }
 
