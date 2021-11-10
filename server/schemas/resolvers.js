@@ -38,8 +38,7 @@ const resolvers = {
 
       return { token, user };
     },
-    createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
-      console.log(characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod);
+    createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp }, context) => {
       if (context.user) {
         const character = await Player.create({
           characterName,
@@ -50,6 +49,8 @@ const resolvers = {
           currentHP,
           damMod,
           evaMod,
+          gold,
+          exp,
         });
 
         const user = await User.findOneAndUpdate(
@@ -57,19 +58,17 @@ const resolvers = {
           { $addToSet: { characters: character } }
         );
 
-        console.log(user);
-
         return character;
       }
-      throw new AuthenticationError('You need to be logged in!'); 
+      throw new AuthenticationError('You need to be logged in!');
     },
-    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod }, context) => {
+    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp}, context) => {
+      console.log("HERE");
       if (context.user) {
-        Player.findOneAndUpdate(
+        const character = Player.findOneAndUpdate(
           { characterName: characterName },
           {
-            $set:
-            {
+            $set: {
               strength: strength,
               agility: agility,
               endurance: endurance,
@@ -77,17 +76,17 @@ const resolvers = {
               currentHP: currentHP,
               damMod: damMod,
               evaMod: evaMod,
+              gold: gold,
+              exp: exp,
             }
           },
-          { new: true }, (err, doc) => {
-            if (err) {
-              console.log("Something wrong when updating data!");
-            }
-            console.log(doc);
-          });
+          { new: true }
+        );
+        console.log("THIS IS CORRECT" + character);
+        return character;
       }
-    },
-  }
+    }
+  },
 };
 
 module.exports = resolvers;

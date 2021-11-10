@@ -14,14 +14,14 @@ const initialState = {
   },
 
   player: {
-    name: "TestGuy",
+    characterName: "",
     maxHP: 0,
     currentHP: 0,
     damMod: 0,
     evaMod: 0,
     potions: 0,
-    totalEXP: 0,
-    totalGold: 0,
+    gold: 0,
+    exp: 0,
     statistics: {
       strength: 0,
       agility: 0,
@@ -41,10 +41,13 @@ export default function reducer(state = initialState, action) {
       ...state,
       player: {
         ...state.player,
+        characterName: action.payload.characterName,
         maxHP: action.payload.maxHP,
         currentHP: action.payload.maxHP,
         damMod: action.payload.damMod,
         evaMod: action.payload.evaMod,
+        gold: action.payload.gold,
+        exp: action.payload.exp,
         statistics: {
           ...state.player.statistics,
           strength: action.payload.strength,
@@ -85,8 +88,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         player: {
           ...state.player,
-          totalGold: action.payload.gold,
-          totalExp: action.payload.exp,
+          gold: action.payload.gold,
+          exp: action.payload.exp,
           potions: action.payload.potions
         },
         message: action.payload.message

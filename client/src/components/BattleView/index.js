@@ -58,7 +58,7 @@ function BattleView() {
     setCommandAvailability(false);
 
     // Check if enemy will evade this attack. If they do, a message is displayed
-    if (!didEvade(player.evaMod, player.name)) {
+    if (!didEvade(player.evaMod, player.characterName)) {
 
       // Calculate damage
       let damage = calculateDamage(enemy.damMod);
@@ -154,8 +154,8 @@ function BattleView() {
       let expGain = enemy.expVal;
       let potionGain = givePotion();
 
-      let totalGold = player.totalGold + goldGain;
-      let totalEXP = player.totalExp + expGain;
+      let totalGold = player.gold + goldGain;
+      let totalEXP = player.exp + expGain;
       let totalPotions = player.potions + potionGain;
 
       if (potionGain > 0) {

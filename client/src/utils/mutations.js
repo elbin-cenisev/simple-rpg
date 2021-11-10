@@ -33,8 +33,8 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_CHARACTER = gql`
-  mutation createCharacter($characterName: String!, $strength: Int!, $agility: Int!, $endurance: Int!, $maxHP: Int!, $currentHP: Int!, $damMod: Float!, $evaMod: Float!) {
-    createCharacter(characterName: $characterName, strength: $strength, agility: $agility, endurance: $endurance, maxHP: $maxHP, currentHP: $currentHP, damMod: $damMod, evaMod: $evaMod) {
+  mutation createCharacter($characterName: String!, $strength: Int!, $agility: Int!, $endurance: Int!, $maxHP: Int!, $currentHP: Int!, $damMod: Float!, $evaMod: Float!, $gold: Int, $exp: Int) {
+    createCharacter(characterName: $characterName, strength: $strength, agility: $agility, endurance: $endurance, maxHP: $maxHP, currentHP: $currentHP, damMod: $damMod, evaMod: $evaMod, gold: $gold, exp: $exp) {
         _id
         characterName
         strength
@@ -44,46 +44,26 @@ export const CREATE_CHARACTER = gql`
         currentHP
         damMod
         evaMod
+        gold
+        exp
     }
   }
-`
+`;
 
 export const SAVE_CHARACTER = gql`
-  mutation saveCharacter(
-    $characterName: String!
-    $strength: Int!
-    $agility: Int!
-    $endurance: Int!
-    $maxHP: Int!
-    $currentHP: Int!
-    $damMod: Float!
-    $evaMod: Float!
-  ) {
-    saveCharacter(
-      characterName: $characterName
-      strength: $strength
-      agility: $agility
-      endurance: $endurance
-      maxHP: $maxHP
-      currentHP: $currentHP
-      damMod: $damMod
-      evaMod: $evaMod
-    ) {
+  mutation saveCharacter($characterName: String!, $strength: Int!, $agility: Int!, $endurance: Int!, $maxHP: Int!, $currentHP: Int!, $damMod: Float!, $evaMod: Float!, $gold: Int, $exp: Int) {
+    saveCharacter(characterName: $characterName, strength: $strength, agility: $agility, endurance: $endurance, maxHP: $maxHP, currentHP: $currentHP, damMod: $damMod, evaMod: $evaMod, gold: $gold, exp: $exp) {
       _id
-      firstName
-      lastName
-      email
-      playerCharacters {
-        _id
-        characterName
-        strength
-        agility
-        endurance
-        maxHP
-        currentHP
-        damMod
-        evaMod
-      }
+      characterName
+      strength
+      agility
+      endurance
+      maxHP
+      currentHP
+      damMod
+      evaMod
+      gold
+      exp
     }
   }
-`
+`;

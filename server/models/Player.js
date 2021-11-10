@@ -33,6 +33,12 @@ const playerSchema = new Schema({
         type: Number,
         required: true
     },
+    gold: {
+        type: Number
+    },
+    exp: {
+        type: Number
+    }
 
 });
 

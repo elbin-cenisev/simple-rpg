@@ -48,15 +48,18 @@ function InnView() {
 
   async function saveCharacter() {
     try {
-      const { data } = await saveCharacter({
+      const { data } = await save({
         variables: {
-          strength: player.strength,
-          agility: player.agility,
-          endurance: player.endurance,
+          characterName: player.characterName,
+          strength: player.statistics.strength,
+          agility: player.statistics.agility,
+          endurance: player.statistics.endurance,
           maxHP: player.maxHP,
-          currentHP: player.maxHP,
+          currentHP: player.currentHP,
           damMod: player.damMod,
           evaMod: player.evaMod,
+          gold: player.gold,
+          exp: player.exp,
         }
       });
     } catch (err) {
@@ -102,7 +105,7 @@ function InnView() {
       </div>
 
       <div id="gold-bar">
-        {player.totalGold} Gold
+        {player.gold} Gold
       </div>
 
       {/* Shows how many potions the player has in their posession */}
