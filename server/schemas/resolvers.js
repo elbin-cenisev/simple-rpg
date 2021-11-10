@@ -63,7 +63,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp}, context) => {
-      console.log("HERE");
       if (context.user) {
         const character = Player.findOneAndUpdate(
           { characterName: characterName },
@@ -82,7 +81,6 @@ const resolvers = {
           },
           { new: true }
         );
-        console.log("THIS IS CORRECT" + character);
         return character;
       }
     }
