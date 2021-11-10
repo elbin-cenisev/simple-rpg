@@ -15,13 +15,13 @@ const initialState = {
 
   player: {
     name: "TestGuy",
-    maxHP: 20,
-    currentHP: 20,
-    damMod: 1,
-    evaMod: .1,
-    potions: 5,
+    maxHP: 0,
+    currentHP: 0,
+    damMod: 0,
+    evaMod: 0,
+    potions: 0,
     totalEXP: 0,
-    totalGold: 100,
+    totalGold: 0,
     statistics: {
       strength: 0,
       agility: 0,
