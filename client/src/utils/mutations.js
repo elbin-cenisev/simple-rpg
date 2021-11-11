@@ -67,3 +67,11 @@ export const SAVE_CHARACTER = gql`
     }
   }
 `;
+
+export const DELETE_CHARACTER = gql`
+    mutation deleteCharacter($characterName: String) {
+        deleteCharacter(characterName: $characterName) {
+            _id
+        }
+    }
+`;

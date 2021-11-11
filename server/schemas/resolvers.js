@@ -7,7 +7,6 @@ const resolvers = {
     user: async (parent, { }, context) => {
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id }).populate('characters');
-        console.log(user);
         return user;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -81,6 +80,30 @@ const resolvers = {
           { new: true }
         );
         return character;
+      }
+    },
+    deleteCharacter: async (parent, { characterName }, context) => {
+      console.log("We are here");
+      if (context.user) {
+        const removedUser = await Player.findOne(
+          { characterName: characterName }
+        );
+        const playerID = removedUser._id;
+        console.log(playerID);
+
+        try {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { characters: { $in: [playerID] } } },
+            { new: true }
+          );
+
+          console.log(updatedUser.characters);
+          return removedUser;
+
+        } catch (err) {
+          console.log(err)
+        }
       }
     }
   },

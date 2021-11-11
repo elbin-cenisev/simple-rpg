@@ -42,6 +42,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     createCharacter(characterName: String!, strength: Int!, agility: Int!, endurance: Int!, maxHP: Int!, currentHP: Int!, damMod: Float!, evaMod: Float!, gold: Int, exp: Int): Player
     saveCharacter(characterName: String!, strength: Int, agility: Int, endurance: Int, maxHP: Int, currentHP: Int, damMod: Float, evaMod: Float, gold: Int, exp: Int): Player
+    deleteCharacter(characterName: String): Player
   }
 `;
 module.exports = typeDefs;
