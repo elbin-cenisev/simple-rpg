@@ -15,6 +15,7 @@ export const GET_USER = gql`
             evaMod
             gold
             exp
+            potions
           }
         }
     }

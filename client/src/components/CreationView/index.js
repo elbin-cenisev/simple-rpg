@@ -63,6 +63,7 @@ function CreationView() {
           evaMod: evaMod,
           gold: 100,
           exp: 0,
+          potions: 0,
         }
       });
 
@@ -79,6 +80,7 @@ function CreationView() {
             evaMod: evaMod,
             gold: 100,
             exp: 0,
+            potions: 0,
           }
         });
       } catch (err) {

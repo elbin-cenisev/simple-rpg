@@ -34,10 +34,13 @@ const playerSchema = new Schema({
         required: true
     },
     gold: {
-        type: Number
+        type: Number,
     },
     exp: {
-        type: Number
+        type: Number,
+    },
+    potions: {
+        type: Number,
     }
 
 });

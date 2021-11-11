@@ -22,6 +22,7 @@ const typeDefs = gql`
     evaMod: Float!
     gold: Int
     exp: Int
+    potions: Int
   }
 
   type Checkout {
@@ -40,8 +41,8 @@ const typeDefs = gql`
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    createCharacter(characterName: String!, strength: Int!, agility: Int!, endurance: Int!, maxHP: Int!, currentHP: Int!, damMod: Float!, evaMod: Float!, gold: Int, exp: Int): Player
-    saveCharacter(characterName: String!, strength: Int, agility: Int, endurance: Int, maxHP: Int, currentHP: Int, damMod: Float, evaMod: Float, gold: Int, exp: Int): Player
+    createCharacter(characterName: String!, strength: Int!, agility: Int!, endurance: Int!, maxHP: Int!, currentHP: Int!, damMod: Float!, evaMod: Float!, gold: Int, exp: Int, potions: Int): Player
+    saveCharacter(characterName: String!, strength: Int, agility: Int, endurance: Int, maxHP: Int, currentHP: Int, damMod: Float, evaMod: Float, gold: Int, exp: Int, potions: Int): Player
     deleteCharacter(characterName: String): Player
   }
 `;

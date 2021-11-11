@@ -38,16 +38,17 @@ const CharacterSelectView = () => {
                 agility: character.agility,
                 endurance: character.endurance,
                 maxHP: character.maxHP,
-                currentHP: character.maxHP,
+                currentHP: character.currentHP,
                 damMod: character.damMod,
                 evaMod: character.evaMod,
                 gold: character.gold,
                 exp: character.exp,
+                potions: character.potions,
             }
         })
 
         if (player.characterName == character.characterName) {
-            console.log(player);
+            console.log(player.currentHP);
             setStart(true);
         }
     }
@@ -85,6 +86,7 @@ const CharacterSelectView = () => {
                                 <li>{userData.characters[0].characterName}</li>
                                 <button onClick={() => selectCharacter(userData.characters[0])}>Select</button>
                                 <button onClick={() => deleteCharacter(userData.characters[0])}>Delete</button>
+                                <p>{userData.characters[0].currentHP}</p>
                             </>
                             : <>
                                 <li><button onClick={createCharacter}>New</button></li>

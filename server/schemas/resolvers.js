@@ -36,7 +36,7 @@ const resolvers = {
 
       return { token, user };
     },
-    createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp }, context) => {
+    createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp, potions }, context) => {
       if (context.user) {
         const character = await Player.create({
           characterName,
@@ -49,6 +49,7 @@ const resolvers = {
           evaMod,
           gold,
           exp,
+          potions,
         });
 
         const user = await User.findOneAndUpdate(
@@ -60,9 +61,9 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp }, context) => {
+    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp, potions }, context) => {
       if (context.user) {
-        const character = Player.findOneAndUpdate(
+        const character = await Player.findOneAndUpdate(
           { characterName: characterName },
           {
             $set: {
@@ -75,10 +76,13 @@ const resolvers = {
               evaMod: evaMod,
               gold: gold,
               exp: exp,
+              potions: potions,
             }
           },
           { new: true }
         );
+        
+        console.log(character);
         return character;
       }
     },

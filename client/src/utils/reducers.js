@@ -7,7 +7,7 @@ const initialState = {
   enemy: {
     name: "Slime",
     maxHP: 20,
-    damMod: 1,
+    damMod: 0.3,
     evasMod: .1,
     goldVal: 5,
     expVal: 10
@@ -43,11 +43,12 @@ export default function reducer(state = initialState, action) {
         ...state.player,
         characterName: action.payload.characterName,
         maxHP: action.payload.maxHP,
-        currentHP: action.payload.maxHP,
+        currentHP: action.payload.currentHP,
         damMod: action.payload.damMod,
         evaMod: action.payload.evaMod,
         gold: action.payload.gold,
         exp: action.payload.exp,
+        potions: action.payload.potions,
         statistics: {
           ...state.player.statistics,
           strength: action.payload.strength,

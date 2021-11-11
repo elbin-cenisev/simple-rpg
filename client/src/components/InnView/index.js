@@ -60,11 +60,16 @@ function InnView() {
           evaMod: player.evaMod,
           gold: player.gold,
           exp: player.exp,
+          potions: player.potions
         }
       });
     } catch (err) {
       console.error(err);
     }
+    dispatch({
+      type: CHANGE_MESSAGE,
+      payload: `You have saved the game!`,
+    });
   }
 
   useEffect(() => {
