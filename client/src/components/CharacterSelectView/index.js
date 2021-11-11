@@ -6,22 +6,19 @@ import Auth from '../../utils/auth';
 
 function CharacterSelectView() {
     const [userData, setUserData] = useState({});
-    const userDataLength = Object.keys(userData).length;
-
     const { loading, data } = useQuery(GET_USER);
 
+    // On page load, get the user info (to get their characters)
     useEffect(() => {
-        if (data) {
-            console.log(data.user);
-        }
-        else if (!loading) {
-            console.log("Finished loading")
+        if (!loading) {
+            setUserData(data.user);
         }
     }, [data, loading]);
 
     return (
         <>
             <h1>Test</h1>
+
         </>
     )
 }
