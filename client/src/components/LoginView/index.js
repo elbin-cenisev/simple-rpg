@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { } from '../../utils/actions';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import { Form, Grid } from 'semantic-ui-react';
 
-
-import './style.css'
+import './style.css';
 
 function LoginView() {
 
@@ -36,45 +36,67 @@ function LoginView() {
   };
 
   return (
-    <div className="container my-1">
-      <Link to="/signup">← Go to Signup</Link>
+    <div className="window">
+      <div className="login-block">
+        <Grid>
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
-          </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+          {/* Welcome Message */}
+          <Grid.Row textAlign="center">
+            <Grid.Column>
+              <h1 className="welcome-text">Are you ready?</h1>
+              <p className="welcome-text">For a game so incredible, so vast and so unbelievably great that you will lose your
+                mind? Well, this isn't it! This is an unfinished proof-of-concept, and I just
+                couldn't think of anything else to write here on the login screen. </p>
+            </Grid.Column>
+          </Grid.Row>
 
-      {Auth.loggedIn() ? (
-          <Redirect to="/select" />
-          ) : (null)}
+          {/* Login Form */}
+          <Grid.Row>
+            <Grid.Column>
+              <Form onSubmit={handleFormSubmit}>
+                <Form.Field>
+                  <label htmlFor="email">Email address: </label>
+                  <input
+                    placeholder="Email Address..."
+                    name="email"
+                    type="email"
+                    id="email"
+                    onChange={handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label htmlFor="pwd">Password: </label>
+                  <input
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    id="pwd"
+                    onChange={handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  {
+                    error ? (
+                      <div>
+                        <p className="error-text">The provided credentials are incorrect</p>
+                      </div>
+                    ) : null
+                  }
+                </Form.Field>
+                <button className="ui button" type="submit">Login</button>
+                <Link to="/signup">Go to Signup</Link>
 
+              </Form >
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        {
+          Auth.loggedIn() ? (
+            <Redirect to="/select" />
+          ) : (null)
+        }
+
+      </div>
     </div>
   );
 }

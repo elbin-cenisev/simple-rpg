@@ -5,10 +5,7 @@ import Header from '../components/Header';
 function LoginScreen() {
   return (
     <>
-      <div>
-        <h1>LoginScreen</h1>
-          <LoginView />
-      </div>
+      <LoginView />
     </>
   );
 }
