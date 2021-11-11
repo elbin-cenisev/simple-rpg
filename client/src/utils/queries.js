@@ -6,6 +6,15 @@ export const GET_USER = gql`
           _id
           characters {
             characterName
+            strength
+            agility
+            endurance
+            maxHP
+            currentHP
+            damMod
+            evaMod
+            gold
+            exp
           }
         }
     }
