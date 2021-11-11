@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { CHANGE_MESSAGE, USE_POTION, GAIN_LOOT } from '../../utils/actions';
+import { CHANGE_MESSAGE } from '../../utils/actions';
 
 import './style.css'
 
