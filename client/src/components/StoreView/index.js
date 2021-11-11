@@ -22,7 +22,7 @@ function StoreView() {
   }
 
   function sellItem() {
-    if (player.totalGold < 50) {
+    if (player.gold < 25) {
       dispatch({
         type: CHANGE_MESSAGE,
         payload: `Sorry, you need more money`,
@@ -31,7 +31,7 @@ function StoreView() {
       dispatch({
         type: BUY_POTION,
         payload: {
-          gold: player.totalGold - 50,
+          gold: player.gold - 25,
           potions: player.potions + 1,
           message: "Thank you!",
         }

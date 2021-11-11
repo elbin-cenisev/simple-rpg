@@ -346,7 +346,7 @@ function BattleView() {
 
       {/* Shows how gold is in the player's possession' */}
       <div id="gold-bar">
-        {player.totalGold} Gold
+        {player.gold} Gold
       </div>
     </div>
   );

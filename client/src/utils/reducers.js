@@ -101,7 +101,7 @@ export default function reducer(state = initialState, action) {
         player: {
           ...state.player,
           currentHP: action.payload.hp,
-          totalGold: action.payload.gold,
+          gold: action.payload.gold,
         },
         message: action.payload.message
       }
@@ -112,7 +112,7 @@ export default function reducer(state = initialState, action) {
         player: {
           ...state.player,
           potions: action.payload.potions,
-          totalGold: action.payload.gold,
+          gold: action.payload.gold,
         },
         message: action.payload.message
       }

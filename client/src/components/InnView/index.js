@@ -28,7 +28,7 @@ function InnView() {
   }
 
   function restInn() {
-    if (player.totalGold < 50) {
+    if (player.gold < 50) {
       dispatch({
         type: CHANGE_MESSAGE,
         payload: `Sorry, you need more money`,
@@ -37,7 +37,7 @@ function InnView() {
       dispatch({
         type: REST,
         payload: {
-          gold: player.totalGold - 50,
+          gold: player.gold - 50,
           hp: player.maxHP,
           message: "You restored your HP",
         }
