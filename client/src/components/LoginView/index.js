@@ -53,7 +53,9 @@ function LoginView() {
           {/* Login Form */}
           <Grid.Row>
             <Grid.Column>
+
               <Form onSubmit={handleFormSubmit}>
+
                 <Form.Field>
                   <label htmlFor="email">Email address: </label>
                   <input
@@ -64,6 +66,7 @@ function LoginView() {
                     onChange={handleChange}
                   />
                 </Form.Field>
+
                 <Form.Field>
                   <label htmlFor="pwd">Password: </label>
                   <input
@@ -74,6 +77,7 @@ function LoginView() {
                     onChange={handleChange}
                   />
                 </Form.Field>
+
                 <Form.Field>
                   {
                     error ? (
@@ -83,6 +87,7 @@ function LoginView() {
                     ) : null
                   }
                 </Form.Field>
+                
                 <button className="ui button" type="submit">Login</button>
                 <Link to="/signup">Go to Signup</Link>
 
