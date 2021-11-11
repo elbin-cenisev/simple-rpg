@@ -72,7 +72,7 @@ function LoginView() {
       </form>
 
       {Auth.loggedIn() ? (
-          <Redirect to="/select" />
+          <Redirect to="/createCharacter" />
           ) : (null)}
 
     </div>

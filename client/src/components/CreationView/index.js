@@ -61,7 +61,7 @@ function CreationView() {
           currentHP: maxHP,
           damMod: damMod,
           evaMod: evaMod,
-          gold: 0,
+          gold: 100,
           exp: 0,
         }
       });
@@ -77,7 +77,7 @@ function CreationView() {
             currentHP: maxHP,
             damMod: damMod,
             evaMod: evaMod,
-            gold: 0,
+            gold: 100,
             exp: 0,
           }
         });

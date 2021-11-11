@@ -75,7 +75,7 @@ function StoreView() {
 
       {/* Shows how much gold is in the player's posession */}
       <div id="gold-bar">
-        {player.totalGold} Gold
+        {player.gold} Gold
       </div>
 
       {/* Shows how many potions the player has in their posession */}

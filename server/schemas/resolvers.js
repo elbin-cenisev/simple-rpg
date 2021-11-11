@@ -4,15 +4,15 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
+    user: async (parent, { email, password }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id)
-
+        console.log(context.user._id);
+        const user = await User.findOne({ _id: context.user._id });
+        console.log(user);
         return user;
       }
-
-      throw new AuthenticationError('Not logged in');
-    },
+      throw new AuthenticationError("You need to be logged in!");
+    }
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -62,7 +62,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp}, context) => {
+    saveCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp }, context) => {
       if (context.user) {
         const character = Player.findOneAndUpdate(
           { characterName: characterName },
