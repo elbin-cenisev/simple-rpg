@@ -9,7 +9,7 @@ function Status() {
     let healthPercentage = (player.currentHP * 100) / player.maxHP
 
     return (
-        <Table celled id="status-bar">
+        <Table unstackable celled id="status-bar">
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell  width={2} textAlign="left"><Icon name='male' /> Name</Table.HeaderCell>

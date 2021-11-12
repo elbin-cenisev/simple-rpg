@@ -38,7 +38,7 @@ function LoginView() {
   return (
     <div className="window">
       <div className="login-block">
-        <Grid>
+        <Grid centered>
 
           {/* Welcome Message */}
           <Grid.Row textAlign="center">

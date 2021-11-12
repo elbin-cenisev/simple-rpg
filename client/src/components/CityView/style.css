@@ -1,9 +1,14 @@
+body {
+background-color: #456f93 !important;
+}
+
 #city-view {
     padding: 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
     max-width: 1000px;
+    background-color: #6993b8;
 }
 
 #city-window {
@@ -12,7 +17,6 @@
     background-position: center center;
     background-size: cover;
     min-height: 450px;
-    border: 3px solid grey;
 }
 
 img {
@@ -25,6 +29,7 @@ img {
 #command-bar {
     margin-top:10px;
     border: none;
+    /* background-color: #d1b894 ; */
 }
 
 button {
@@ -33,9 +38,9 @@ button {
 }
 
 #message-bar {
-    border: 2px solid grey !important;
+    background-color: #cddbe7 ;
 }
 
-@media only screen and (max-width: 768) {
+@media only screen and (max-height: 768) {
 
   }
