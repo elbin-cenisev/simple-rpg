@@ -1,11 +1,33 @@
 .select-menu {
-
+    width: 70%;
+    margin: auto;
+    padding: 50px;
 }
 
-.character-info {
+.button-bar {
+    margin-top: 10px;
+}
+
+.item {
     border: none;
 }
 
 .descriptor {
     font-weight: bold;
 }
+
+@media only screen and (max-width: 600px) {
+    .select-menu {
+        width: 100%
+    }
+    .character-info {
+        margin-top: 30%;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .select-menu {
+        width: 100%;
+        padding: 10px;
+    }
+  }

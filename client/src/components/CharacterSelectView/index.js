@@ -83,15 +83,16 @@ const CharacterSelectView = () => {
         <div className="select-menu">
             {userDataLength
                 ? <>
-                    <List divided verticalAlign="middle">
+                    <List verticalAlign="middle">
                         {userData.characters.length > 0
                             ? <>
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            Character 1: {userData.characters[0].characterName}
+                                            {userData.characters[0].characterName}
                                         </Header>
                                     </Divider>
+
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
@@ -115,18 +116,19 @@ const CharacterSelectView = () => {
                                         </Table>
                                     </List.Content>
 
-                                    <List.Content floated="left">
-                                        <button className="ui button" onClick={() => selectCharacter(userData.characters[0])}>
-                                            Select
-                                        </button>
-                                    </List.Content>
+                                    <div className="button-bar">
+                                        <List.Content floated="left">
+                                            <button className="ui button" onClick={() => selectCharacter(userData.characters[0])}>
+                                                Select
+                                            </button>
+                                        </List.Content>
 
-                                    <List.Content floated="right">
-                                        <button className="ui button" onClick={() => deleteCharacter(userData.characters[0])}>
-                                            Delete
-                                        </button>
-                                    </List.Content>
-
+                                        <List.Content floated="right">
+                                            <button className="ui button" onClick={() => deleteCharacter(userData.characters[0])}>
+                                                Delete
+                                            </button>
+                                        </List.Content>
+                                    </div>
                                 </List.Item>
                             </>
                             : <>
@@ -136,36 +138,39 @@ const CharacterSelectView = () => {
                                             Empty Character Slot
                                         </Header>
                                     </Divider>
+
+
+                                    <List.Content>
+                                        <Table definition>
+                                            <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='sun' />EXP</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='rupee sign' />Gold</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='first aid' />Potions</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                            </Table.Body>
+                                        </Table>
+                                    </List.Content>
+
+                                    <div className="button-bar">
+                                        <List.Content floated="left">
+                                            <button className="ui button" onClick={() => createCharacter()}>
+                                                New
+                                            </button>
+                                        </List.Content>
+                                    </div>
                                 </List.Item>
-
-                                <List.Content>
-                                    <Table definition>
-                                        <Table.Body>
-                                            <Table.Row>
-                                                <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='sun' />EXP</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='rupee sign' />Gold</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='first aid' />Potions</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                        </Table.Body>
-                                    </Table>
-                                </List.Content>
-
-                                <List.Content floated="left">
-                                    <button className="ui button" onClick={() => createCharacter()}>
-                                        New
-                                    </button>
-                                </List.Content>
                             </>
                         }
                         {userData.characters.length > 1
@@ -173,15 +178,16 @@ const CharacterSelectView = () => {
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            1: {userData.characters[1].characterName}
+                                            {userData.characters[1].characterName}
                                         </Header>
                                     </Divider>
+
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
-                                                    <Table.Cell>{userData.characters[1].currentHP} / {userData.characters[0].maxHP}</Table.Cell>
+                                                    <Table.Cell>{userData.characters[1].currentHP} / {userData.characters[1].maxHP}</Table.Cell>
                                                 </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell><Icon name='sun' />EXP</Table.Cell>
@@ -198,29 +204,29 @@ const CharacterSelectView = () => {
                                             </Table.Body>
                                         </Table>
                                     </List.Content>
+                                    <div className="button-bar">
+                                        <List.Content floated="left">
+                                            <button className="ui button" onClick={() => selectCharacter(userData.characters[1])}>
+                                                Select
+                                            </button>
+                                        </List.Content>
 
-                                    <List.Content floated="left">
-                                        <button className="ui button" onClick={() => selectCharacter(userData.characters[1])}>
-                                            Select
-                                        </button>
-                                    </List.Content>
-
-                                    <List.Content floated="right">
-                                        <button className="ui button" onClick={() => deleteCharacter(userData.characters[1])}>
-                                            Delete
-                                        </button>
-                                    </List.Content>
+                                        <List.Content floated="right">
+                                            <button className="ui button" onClick={() => deleteCharacter(userData.characters[1])}>
+                                                Delete
+                                            </button>
+                                        </List.Content>
+                                    </div>
 
                                 </List.Item>
                             </>
-                            : <>
-                                <List.Item className="character-info">
-                                    <Divider horizontal>
-                                        <Header as='h3'>
-                                            Empty Character Slot
-                                        </Header>
-                                    </Divider>
-                                </List.Item>
+                            :
+                            <List.Item className="character-info">
+                                <Divider horizontal>
+                                    <Header as='h3'>
+                                        Empty Character Slot
+                                    </Header>
+                                </Divider>
 
                                 <List.Content>
                                     <Table definition>
@@ -245,19 +251,21 @@ const CharacterSelectView = () => {
                                     </Table>
                                 </List.Content>
 
-                                <List.Content floated="left">
-                                    <button className="ui button" onClick={() => createCharacter()}>
-                                        New
-                                    </button>
-                                </List.Content>
-                            </>
+                                <div className="button-bar">
+                                    <List.Content floated="left">
+                                        <button className="ui button" onClick={() => createCharacter()}>
+                                            New
+                                        </button>
+                                    </List.Content>
+                                </div>
+                            </List.Item>
                         }
                         {userData.characters.length > 2
                             ? <>
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            1: {userData.characters[0].characterName}
+                                            {userData.characters[2].characterName}
                                         </Header>
                                     </Divider>
                                     <List.Content>
@@ -265,7 +273,7 @@ const CharacterSelectView = () => {
                                             <Table.Body>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
-                                                    <Table.Cell>{userData.characters[2].currentHP} / {userData.characters[0].maxHP}</Table.Cell>
+                                                    <Table.Cell>{userData.characters[2].currentHP} / {userData.characters[2].maxHP}</Table.Cell>
                                                 </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell><Icon name='sun' />EXP</Table.Cell>
@@ -283,17 +291,19 @@ const CharacterSelectView = () => {
                                         </Table>
                                     </List.Content>
 
-                                    <List.Content floated="left">
-                                        <button className="ui button" onClick={() => selectCharacter(userData.characters[2])}>
-                                            Select
-                                        </button>
-                                    </List.Content>
+                                    <div className="button-bar">
+                                        <List.Content floated="left">
+                                            <button className="ui button" onClick={() => selectCharacter(userData.characters[2])}>
+                                                Select
+                                            </button>
+                                        </List.Content>
 
-                                    <List.Content floated="right">
-                                        <button className="ui button" onClick={() => deleteCharacter(userData.characters[2])}>
-                                            Delete
-                                        </button>
-                                    </List.Content>
+                                        <List.Content floated="right">
+                                            <button className="ui button" onClick={() => deleteCharacter(userData.characters[2])}>
+                                                Delete
+                                            </button>
+                                        </List.Content>
+                                    </div>
 
                                 </List.Item>
                             </>
@@ -304,36 +314,38 @@ const CharacterSelectView = () => {
                                             Empty Character Slot
                                         </Header>
                                     </Divider>
+
+                                    <List.Content>
+                                        <Table definition>
+                                            <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='sun' />EXP</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='rupee sign' />Gold</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell><Icon name='first aid' />Potions</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                            </Table.Body>
+                                        </Table>
+                                    </List.Content>
+
+                                    <div className="button-bar">
+                                        <List.Content floated="left">
+                                            <button className="ui button" onClick={() => createCharacter()}>
+                                                New
+                                            </button>
+                                        </List.Content>
+                                    </div>
                                 </List.Item>
-
-                                <List.Content>
-                                    <Table definition>
-                                        <Table.Body>
-                                            <Table.Row>
-                                                <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='sun' />EXP</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='rupee sign' />Gold</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                            <Table.Row>
-                                                <Table.Cell><Icon name='first aid' />Potions</Table.Cell>
-                                                <Table.Cell></Table.Cell>
-                                            </Table.Row>
-                                        </Table.Body>
-                                    </Table>
-                                </List.Content>
-
-                                <List.Content floated="left">
-                                    <button className="ui button" onClick={() => createCharacter()}>
-                                        New
-                                    </button>
-                                </List.Content>
                             </>
                         }
                     </List>

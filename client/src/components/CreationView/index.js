@@ -179,7 +179,7 @@ function CreationView() {
       <button onClick={handleFormSubmit}>Create your Character</button>
 
       {finished ? (
-        <Redirect to="/city" />
+        <Redirect to="/select" />
       ) : (null)}
 
 
