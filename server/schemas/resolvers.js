@@ -37,6 +37,7 @@ const resolvers = {
       return { token, user };
     },
     createCharacter: async (parent, { characterName, strength, agility, endurance, maxHP, currentHP, damMod, evaMod, gold, exp, potions }, context) => {
+      console.log("Server-side");
       if (context.user) {
         const character = await Player.create({
           characterName,

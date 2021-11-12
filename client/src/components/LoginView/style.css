@@ -29,10 +29,9 @@
         padding-top: 1%;
     }
     .login-block {
-        margin-left: 2%;
-        margin-right: 2%;
-        padding:3em;
+        margin:auto;
     }
+
     .welcome-text {
         line-height: 1.5;
         font-size: 100%;

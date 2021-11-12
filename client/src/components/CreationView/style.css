@@ -1,0 +1,42 @@
+.creation-view {
+    font-size: 150%;
+    padding: 2rem;
+}
+
+.creation-view .field {
+    margin-top: 3rem !important;
+}
+
+.base-statistics {
+    margin-top: 5rem;
+}
+
+.derived-statistics {
+    margin-top: 5rem;
+}
+
+#characterName {
+    width: 75%;
+}
+
+.creation-view Form {
+    text-align:center;       
+}
+
+.done-section {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+@media only screen and (max-width: 770px) {
+    #characterName {
+        width: 100%;
+    }
+
+    .base-statistics .field{
+        width: 5px !important;
+    }
+  }
+
+
+

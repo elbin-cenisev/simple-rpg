@@ -35,7 +35,6 @@ export const ADD_USER = gql`
 export const CREATE_CHARACTER = gql`
   mutation createCharacter($characterName: String!, $strength: Int!, $agility: Int!, $endurance: Int!, $maxHP: Int!, $currentHP: Int!, $damMod: Float!, $evaMod: Float!, $gold: Int, $exp: Int, $potions: Int) {
     createCharacter(characterName: $characterName, strength: $strength, agility: $agility, endurance: $endurance, maxHP: $maxHP, currentHP: $currentHP, damMod: $damMod, evaMod: $evaMod, gold: $gold, exp: $exp, potions: $potions) {
-        _id
         characterName
         strength
         agility
