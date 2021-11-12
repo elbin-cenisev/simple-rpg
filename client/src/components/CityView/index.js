@@ -61,16 +61,6 @@ function CityView() {
         </div>
       </div>
 
-      {/* Shows player's current HP */}
-      <div id="health-bar">
-        {player.currentHP} / {player.maxHP}
-      </div>
-
-      {/* Shows how many potions the player has in their posession */}
-      <div id="potion-bar">
-        {player.potions} Potions
-      </div>
-
       {storeVisit ? (
         <Redirect to="/store" />
       ) : (null)}
