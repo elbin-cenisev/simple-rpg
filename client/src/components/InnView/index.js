@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { SAVE_CHARACTER } from '../../utils/mutations';
 
 import './style.css'
+import { Grid } from 'semantic-ui-react';
 
 function InnView() {
 
@@ -81,35 +82,33 @@ function InnView() {
 
   return (
 
-    <div id="innView">
+    <>
+      <Grid id="inn-view">
+        {/* The message-bar displays what is currently going on */}
+        <Grid.Row centered id="message-bar">
+          <p id="message">{message}</p>
+        </Grid.Row>
 
-      {/* The message-bar displays what is currently going on */}
-      <div id="message-bar">
-        <p id="message">{message}</p>
-      </div>
+        {/* The city-window just shows an image of the city you are in */}
+        <Grid.Row centered id="inn-window">
+        </Grid.Row>
 
-      {/* The city-window just shows an image of the inn you are in */}
-      <div id="inn-window">
-
-      </div>
-
-      {/* The command-bar shows what the player can do */}
-      <div id="command-bar">
-        <div id="actions">
-          <button onClick={returnToCity}>Leave</button>
+        {/* The command-bar shows what the player can do */}
+        <Grid.Row id="command-bar" columns='equal'>
+          <Grid.Column><button className="ui button blue" onClick={returnToCity}>Return to City</button></Grid.Column>
           {rested ? (null) : (
-            <button onClick={restInn}>Rest</button>
+            <Grid.Column><button className="ui button blue" onClick={restInn}>Rest</button></Grid.Column>
           )}
-          <button onClick={saveCharacter}>Save</button>
-        </div>
-      </div>
+          <Grid.Column><button className="ui button blue" onClick={saveCharacter}>Save</button></Grid.Column>
+        </Grid.Row>
+      </Grid>
 
-      {/* Shows how much gold the player has in their posession */}
-      {cityVisit ? (
-        <Redirect to="/city" />
-      ) : (null)}
+        {/* Shows how much gold the player has in their posession */}
+        {cityVisit ? (
+          <Redirect to="/city" />
+        ) : (null)}
 
-    </div>
+    </>
   );
 };
 
