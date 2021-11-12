@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { Redirect } from 'react-router-dom';
+import {  } from 'semantic-ui-react';
 
 import { SET_STATISTICS } from '../../utils/actions';
 import { CREATE_CHARACTER } from '../../utils/mutations';
