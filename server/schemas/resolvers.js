@@ -81,7 +81,7 @@ const resolvers = {
           },
           { new: true }
         );
-        
+
         console.log(character);
         return character;
       }
@@ -103,11 +103,20 @@ const resolvers = {
           );
 
           console.log(updatedUser.characters);
-          return removedUser;
 
         } catch (err) {
           console.log(err)
         }
+
+        try {
+          await Player.deleteOne({ _id: playerID });
+          console.log(`${playerID} has been deleted`);
+          
+        } catch (err) {
+          console.log(err)
+        }
+
+        return removedUser;
       }
     }
   },
