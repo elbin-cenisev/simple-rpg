@@ -1,9 +1,20 @@
+#store-view {
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    max-width: 1000px;
+    background-color: #6993b8;
+    border: 1px solid #172531 ;
+    border-radius: 20px;
+}
+
 #store-window {
-    height: 400px;
-    width: 400px;
     background:url("./background.jpg");
     background-repeat: no-repeat;
-    border: 1px solid black;
+    background-position: center center;
+    background-size: cover;
+    min-height: 450px;
 }
 
 img {
@@ -14,9 +25,8 @@ img {
 }
 
 #command-bar {
-    width: 400px;
     margin-top:10px;
-    text-align: center;
+    border: none;
 }
 
 button {
@@ -25,8 +35,5 @@ button {
 }
 
 #message-bar {
-    width: 400px;
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 5px;
+    background-color: #cddbe7 ;
 }

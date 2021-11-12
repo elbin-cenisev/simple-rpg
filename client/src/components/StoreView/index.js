@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BUY_POTION, CHANGE_MESSAGE } from '../../utils/actions';
 
 import './style.css'
+import { Grid } from 'semantic-ui-react';
 
 function StoreView() {
 
@@ -42,37 +43,33 @@ function StoreView() {
   useEffect(() => {
     dispatch({
       type: CHANGE_MESSAGE,
-      payload: `Welcome! What do you want to buy?`,
+      payload: `Welcome! Would you like a health potion for 25 gold?`,
     })
   }, []);
 
   return (
+<>
+    <Grid id="store-view">
+        {/* The message-bar displays what is currently going on */}
+        <Grid.Row centered id="message-bar">
+          <p id="message">{message}</p>
+        </Grid.Row>
 
-    <div id="storeView">
+        {/* The city-window just shows an image of the city you are in */}
+        <Grid.Row centered id="store-window">
+        </Grid.Row>
 
-      {/* The message-bar displays what is currently going on */}
-      <div id="message-bar">
-        <p id="message">{message}</p>
-      </div>
-
-      {/* The city-window just shows an image of the inn you are in */}
-      <div id="store-window">
-
-      </div>
-
-      {/* The command-bar shows what the player can do */}
-      <div id="command-bar">
-        <div id="actions">
-          <button onClick={returnToCity}>Leave</button>
-          <button onClick={sellItem}>Buy Potion</button>
-        </div>
-      </div>
+        {/* The command-bar shows what the player can do */}
+        <Grid.Row id="command-bar" columns='equal'>
+          <Grid.Column><button className="ui button blue" onClick={returnToCity}>Return to City</button></Grid.Column>
+          <Grid.Column><button className="ui button blue" onClick={sellItem}>Buy Potion</button></Grid.Column>
+        </Grid.Row>
+      </Grid>
 
       {cityVisit ? (
         <Redirect to="/city" />
       ) : (null)}
-
-    </div>
+    </>
   );
 };
 
