@@ -23,3 +23,17 @@
 .error-text {
     color:red;
 }
+
+@media only screen and (max-width: 1200px) {
+    .login-block {
+        margin-top: 0%;
+        margin-left: 5%;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .login-block {
+        margin-top: 0%;
+        margin-left: 0%;
+    }
+  }

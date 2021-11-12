@@ -25,16 +25,15 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .window {
-        padding-top: 1%;
-    }
     .login-block {
-        margin-left: 2%;
-        margin-right: 2%;
-        padding:3em;
+        margin-top: 0%;
+        margin-left: 5%;
     }
-    .welcome-text {
-        line-height: 1.5;
-        font-size: 100%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    .login-block {
+        margin-top: 0%;
+        margin-left: 0%;
     }
   }
