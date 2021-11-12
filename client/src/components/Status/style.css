@@ -1,0 +1,15 @@
+#status-bar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+#status-bar .item {
+    
+}
+
+.new-button {
+    text-align: center;
+}

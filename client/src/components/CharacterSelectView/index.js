@@ -148,7 +148,7 @@ const CharacterSelectView = () => {
                                     </Divider>
 
 
-                                    <List.Content>
+                                    {/* <List.Content>
                                         <Table definition>
                                             <Table.Body>
                                                 <Table.Row>
@@ -173,12 +173,12 @@ const CharacterSelectView = () => {
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table>
-                                    </List.Content>
+                                    </List.Content> */}
 
                                     <div className="button-bar">
-                                        <List.Content floated="left">
+                                        <List.Content className="new-button">
                                             <button className="ui button" onClick={() => createCharacter()}>
-                                                New
+                                                Create New
                                             </button>
                                         </List.Content>
                                     </div>
@@ -244,7 +244,7 @@ const CharacterSelectView = () => {
                                     </Header>
                                 </Divider>
 
-                                <List.Content>
+                                {/* <List.Content>
                                     <Table definition>
                                         <Table.Body>
                                             <Table.Row>
@@ -269,12 +269,12 @@ const CharacterSelectView = () => {
                                             </Table.Row>
                                         </Table.Body>
                                     </Table>
-                                </List.Content>
+                                </List.Content> */}
 
                                 <div className="button-bar">
-                                    <List.Content floated="left">
+                                    <List.Content  className="new-button">
                                         <button className="ui button" onClick={() => createCharacter()}>
-                                            New
+                                            Create New
                                         </button>
                                     </List.Content>
                                 </div>
@@ -339,7 +339,7 @@ const CharacterSelectView = () => {
                                         </Header>
                                     </Divider>
 
-                                    <List.Content>
+                                    {/* <List.Content>
                                         <Table definition>
                                             <Table.Body>
                                                 <Table.Row>
@@ -364,12 +364,12 @@ const CharacterSelectView = () => {
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table>
-                                    </List.Content>
+                                    </List.Content> */}
 
                                     <div className="button-bar">
-                                        <List.Content floated="left">
+                                        <List.Content className="new-button">
                                             <button className="ui button" onClick={() => createCharacter()}>
-                                                New
+                                                Create New
                                             </button>
                                         </List.Content>
                                     </div>
