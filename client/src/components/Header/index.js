@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import Auth from '../../utils/auth';
-import { Redirect } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
+import './style.css';
 
 function Header() {
     return (
         <>
-            <button onClick={Auth.logout}>Logout</button>
+            <Menu className="header-menu">
+                <Menu.Item
+                    name='logout'
+                    onClick={Auth.logout}
+                >
+                </Menu.Item>
+            </Menu>
         </>
     )
 }

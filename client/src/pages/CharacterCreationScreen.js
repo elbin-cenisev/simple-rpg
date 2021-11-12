@@ -6,7 +6,6 @@ function CharacterCreationScreen() {
   return (
     <>
       <div>
-        <h1>CharacterCreationScreen</h1>
         <Header />
         <CreationView />
       </div>
