@@ -81,6 +81,10 @@ const CharacterSelectView = () => {
 
     return (
         <div className="select-menu">
+            <Header as='h1' textAlign='center'>
+            Select a Character
+          </Header>
+
             {userDataLength
                 ? <>
                     <List verticalAlign="middle">
@@ -89,13 +93,17 @@ const CharacterSelectView = () => {
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            {userData.characters[0].characterName}
+                                            Character 1
                                         </Header>
                                     </Divider>
 
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                    <Table.Cell>{userData.characters[0].characterName}</Table.Cell>
+                                                </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                     <Table.Cell>{userData.characters[0].currentHP} / {userData.characters[0].maxHP}</Table.Cell>
@@ -144,6 +152,10 @@ const CharacterSelectView = () => {
                                         <Table definition>
                                             <Table.Body>
                                                 <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                     <Table.Cell></Table.Cell>
                                                 </Table.Row>
@@ -178,13 +190,17 @@ const CharacterSelectView = () => {
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            {userData.characters[1].characterName}
+                                            Character 2
                                         </Header>
                                     </Divider>
 
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                    <Table.Cell>{userData.characters[1].characterName}</Table.Cell>
+                                                </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                     <Table.Cell>{userData.characters[1].currentHP} / {userData.characters[1].maxHP}</Table.Cell>
@@ -232,6 +248,10 @@ const CharacterSelectView = () => {
                                     <Table definition>
                                         <Table.Body>
                                             <Table.Row>
+                                                <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                <Table.Cell></Table.Cell>
+                                            </Table.Row>
+                                            <Table.Row>
                                                 <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                 <Table.Cell></Table.Cell>
                                             </Table.Row>
@@ -265,12 +285,16 @@ const CharacterSelectView = () => {
                                 <List.Item className="character-info">
                                     <Divider horizontal>
                                         <Header as='h3'>
-                                            {userData.characters[2].characterName}
+                                            Character 3
                                         </Header>
                                     </Divider>
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                    <Table.Cell>{userData.characters[2].characterName}</Table.Cell>
+                                                </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                     <Table.Cell>{userData.characters[2].currentHP} / {userData.characters[2].maxHP}</Table.Cell>
@@ -318,6 +342,10 @@ const CharacterSelectView = () => {
                                     <List.Content>
                                         <Table definition>
                                             <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell width={2}><Icon name='male' />Name</Table.Cell>
+                                                    <Table.Cell></Table.Cell>
+                                                </Table.Row>
                                                 <Table.Row>
                                                     <Table.Cell width={2}><Icon name='heart' />HP</Table.Cell>
                                                     <Table.Cell></Table.Cell>

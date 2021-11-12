@@ -42,8 +42,6 @@ function CreationView() {
   };
 
   async function handleFormSubmit(event) {
-    event.preventDefault();
-
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -258,7 +256,7 @@ function CreationView() {
       </div>
 
       {finished ? (
-        <Redirect to="/select" />
+        <Redirect to="/city" />
       ) : (null)}
 
     </div >
