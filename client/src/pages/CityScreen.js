@@ -7,7 +7,6 @@ function CityScreen() {
   return (
     <>
       <div>
-        <h1>Get prepared!</h1>
         <Header />
         <CityView />
         <Status />

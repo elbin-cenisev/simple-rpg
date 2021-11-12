@@ -23,17 +23,3 @@
 .error-text {
     color:red;
 }
-
-@media only screen and (max-width: 1200px) {
-    .window {
-        padding-top: 1%;
-    }
-    .login-block {
-        margin:auto;
-    }
-
-    .welcome-text {
-        line-height: 1.5;
-        font-size: 100%;
-    }
-  }

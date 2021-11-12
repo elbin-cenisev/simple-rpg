@@ -6,10 +6,16 @@
     text-align: center;
 }
 
-#status-bar .item {
-    
-}
+@media only screen and (max-width: 1200px) {
+    .window {
+        padding-top: 1%;
+    }
+    .login-block {
+        margin:auto;
+    }
 
-.new-button {
-    text-align: center;
-}
+    .welcome-text {
+        line-height: 1.5;
+        font-size: 100%;
+    }
+  }

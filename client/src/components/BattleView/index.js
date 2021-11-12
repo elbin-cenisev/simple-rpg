@@ -333,21 +333,6 @@ function BattleView() {
           <Redirect to="/city" />
         ) : (null)}
       </div>
-
-      {/* Shows player's current HP */}
-      <div id="health-bar">
-        {player.currentHP} / {player.maxHP}
-      </div>
-
-      {/* Shows how many potions the player has in their posession */}
-      <div id="potion-bar">
-        {player.potions} Potions
-      </div>
-
-      {/* Shows how gold is in the player's possession' */}
-      <div id="gold-bar">
-        {player.gold} Gold
-      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CHANGE_MESSAGE } from '../../utils/actions';
 
 import './style.css'
+import { Grid } from 'semantic-ui-react';
 
 function CityView() {
 
@@ -39,39 +40,41 @@ function CityView() {
   }, []);
 
   return (
+    <>
+      <Grid id="city-view">
+        {/* The message-bar displays what is currently going on */}
+        <Grid.Row centered id="message-bar">
+          <p id="message">{message}</p>
+        </Grid.Row>
 
-    <div id="cityView">
+        {/* The city-window just shows an image of the city you are in */}
+        <Grid.Row centered id="city-window">
+        </Grid.Row>
 
-      {/* The message-bar displays what is currently going on */}
-      <div id="message-bar">
-        <p id="message">{message}</p>
-      </div>
+        {/* The command-bar shows what the player can do */}
+        <Grid.Row id="command-bar" columns='equal'>
+          <Grid.Column><button className="ui button blue" onClick={visitStore}>Go to Store</button></Grid.Column>
+          <Grid.Column><button className="ui button blue" onClick={visitInn}>Go to Inn</button></Grid.Column>
+          <Grid.Column><button className="ui button red" onClick={goOut}>Leave City</button></Grid.Column>
+        </Grid.Row>
+      </Grid>
 
-      {/* The city-window just shows an image of the inn you are in */}
-      <div id="city-window">
-
-      </div>
-
-      {/* The command-bar shows what the player can do */}
-      <div id="command-bar">
-        <div id="actions">
-          <button onClick={visitStore}>Go to Store</button>
-          <button onClick={visitInn}>Go to Inn</button>
-          <button onClick={goOut}>Leave City</button>
-        </div>
-      </div>
-
-      {storeVisit ? (
-        <Redirect to="/store" />
-      ) : (null)}
-      {innVisit ? (
-        <Redirect to="/inn" />
-      ) : (null)}
-      {leaveCity ? (
-        <Redirect to="/battle" />
-      ) : (null)}
-
-    </div>
+      {
+        storeVisit ? (
+          <Redirect to="/store" />
+        ) : (null)
+      }
+      {
+        innVisit ? (
+          <Redirect to="/inn" />
+        ) : (null)
+      }
+      {
+        leaveCity ? (
+          <Redirect to="/battle" />
+        ) : (null)
+      }
+    </>
   );
 };
 

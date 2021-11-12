@@ -46,7 +46,7 @@ function LoginView() {
               <h1 className="welcome-text">Are you ready?</h1>
               <p className="welcome-text">For a game so incredible, so vast and so unbelievably great that you will lose your
                 mind? Well, this isn't it! This is an unfinished proof-of-concept, and I just
-                couldn't think of anything else to write here on the login screen. </p>
+                couldn't think of anything else to write here on the login screen... And I swear this isn't Comic Sans, it's supposed to be Cursive</p>
             </Grid.Column>
           </Grid.Row>
 

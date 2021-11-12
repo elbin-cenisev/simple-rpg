@@ -12,7 +12,7 @@ function Status() {
         <Table celled id="status-bar">
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell  width={1} textAlign="left"><Icon name='male' /> Name</Table.HeaderCell>
+                    <Table.HeaderCell  width={2} textAlign="left"><Icon name='male' /> Name</Table.HeaderCell>
                     <Table.HeaderCell textAlign="left"><Icon name='heart' /> Health</Table.HeaderCell>
                     <Table.HeaderCell width={2} textAlign="left"><Icon name='first aid' /> Potions</Table.HeaderCell>
                     <Table.HeaderCell width={2} textAlign="left"><Icon name='sun' /> EXP</Table.HeaderCell>

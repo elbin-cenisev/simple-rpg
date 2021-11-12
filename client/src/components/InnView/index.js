@@ -104,20 +104,6 @@ function InnView() {
         </div>
       </div>
 
-      {/* Shows player's current HP */}
-      <div id="health-bar">
-        {player.currentHP} / {player.maxHP}
-      </div>
-
-      <div id="gold-bar">
-        {player.gold} Gold
-      </div>
-
-      {/* Shows how many potions the player has in their posession */}
-      <div id="potion-bar">
-        {player.potions} Potions
-      </div>
-
       {/* Shows how much gold the player has in their posession */}
       {cityVisit ? (
         <Redirect to="/city" />

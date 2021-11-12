@@ -68,21 +68,6 @@ function StoreView() {
         </div>
       </div>
 
-      {/* Shows player's current HP */}
-      <div id="health-bar">
-        {player.currentHP} / {player.maxHP}
-      </div>
-
-      {/* Shows how much gold is in the player's posession */}
-      <div id="gold-bar">
-        {player.gold} Gold
-      </div>
-
-      {/* Shows how many potions the player has in their posession */}
-      <div id="potion-bar">
-        {player.potions} Potions
-      </div>
-
       {cityVisit ? (
         <Redirect to="/city" />
       ) : (null)}

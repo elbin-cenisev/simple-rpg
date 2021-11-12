@@ -1,6 +1,7 @@
 import React, { } from 'react';
 import BattleView from '../components/BattleView';
 import Header from '../components/Header';
+import Status from '../components/Status';
 
 function BattleScreen() {
   return (
@@ -8,6 +9,7 @@ function BattleScreen() {
       <div>
         <h1>BattleScreen</h1>
           <BattleView />
+          <Status />
       </div>
     </>
   );

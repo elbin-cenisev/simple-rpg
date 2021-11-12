@@ -1,13 +1,15 @@
 import React, { } from 'react';
 import InnView from '../components/InnView';
 import Header from '../components/Header';
+import Status from '../components/Status';
 
 function InnScreen() {
   return (
     <>
       <div>
-        <h1>InnScreen</h1>
-          <InnView />
+        <Header />
+        <InnView />
+        <Status />
       </div>
     </>
   );
