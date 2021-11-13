@@ -17,17 +17,10 @@
     min-height: 450px;
 }
 
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 100px;
-}
-
 #command-bar {
     margin-top:10px;
     border: none;
-    /* background-color: #d1b894 ; */
+    text-align: center;
 }
 
 button {
@@ -36,6 +29,7 @@ button {
 }
 
 #message-bar {
+    text-align: center;
     background-color: #cddbe7 ;
 }
 

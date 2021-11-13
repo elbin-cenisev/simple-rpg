@@ -7,9 +7,9 @@ function BattleScreen() {
   return (
     <>
       <div>
-        <h1>BattleScreen</h1>
-          <BattleView />
-          <Status />
+        <Header />
+        <BattleView />
+        <Status />
       </div>
     </>
   );

@@ -1,9 +1,21 @@
+#battle-view {
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    max-width: 1000px;
+    background-color: #6993b8;
+    border: 1px solid #172531 ;
+    border-radius: 20px;
+}
+
 #enemy-window {
-    height: 400px;
-    width: 400px;
     background:url("./background.jpg");
     background-repeat: no-repeat;
-    border: 1px solid black;
+    background-position: center center;
+    background-size: cover;
+    min-height: 450px;
+    border-radius: 20px;
 }
 
 img {
@@ -11,12 +23,15 @@ img {
     margin-left: auto;
     margin-right: auto;
     padding-top: 100px;
+    width: auto;
+    height: 400px;
+    border-radius: 20px;
 }
 
 #command-bar {
-    width: 400px;
     margin-top:10px;
-    text-align: center;
+    border: none;
+    text-align: center !important;
 }
 
 button {
@@ -25,8 +40,8 @@ button {
 }
 
 #message-bar {
-    width: 400px;
     text-align: center;
-    border: 1px solid black;
-    margin-bottom: 5px;
+    background-color: #cddbe7 ;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }

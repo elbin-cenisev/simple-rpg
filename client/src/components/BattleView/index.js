@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { CHANGE_MESSAGE, USE_POTION, GAIN_LOOT, ADJUST_HP } from '../../utils/actions';
 
-
+import { Grid } from 'semantic-ui-react';
 import './style.css'
 
 function BattleView() {
@@ -292,48 +292,47 @@ function BattleView() {
   }, []);
 
   return (
-    <div id="battleView">
+    <>
+      <Grid id="battle-view">
 
-      {/* The message-bar displays what is currently going on */}
-      <div id="message-bar">
-        <p id="message">{message}</p>
-        {commandsAvailable ? (
-          <span>(Select an action)</span>
-        ) : (
-          <button onClick={progressTurn}>Continue</button>
-        )}
-      </div>
+        {/* The message-bar displays what is currently going on */}
+        <Grid.Row centered id="message-bar">
+          <p id="message">{message}</p>
+        </Grid.Row>
 
-      {/* The enemy-window just shows an image of the enemy you are fighting*/}
-      <div id="enemy-window">
+        {/* The enemy-window just shows an image of the enemy you are fighting*/}
+        <Grid.Row centered id="enemy-window">
 
-        {/* If enemy is alive, show their picture */}
-        {isEnemyAlive ? (
-          <img src={'./images/slime.png'} />
-        ) : (null)}
-      </div>
+          {/* If enemy is alive, show their picture */}
+          {isEnemyAlive ? (
+            <img src={'./images/slime.png'} />
+          ) : (null)}
 
-      {/* The command-bar shows all the commands a player can make durin their turn */}
-      <div id="command-bar">
+        </Grid.Row>
 
-        {/* Only show buttons when it is the player's turn */}
-        {commandsAvailable ? (
-          <div id="actions">
-            <button onClick={flee}>Flee</button>
-            <button onClick={playerAttack}>Attack</button>
-            <button onClick={useItem}>Potion</button>
-          </div>
-        ) : (
-          <span>It is not your turn yet</span>
-        )}
-        {gameOver & isEnemyAlive ? (
-          <Redirect to="/gameover" />
-        ) : (null)}
-        {gameOver & isPlayerAlive ? (
-          <Redirect to="/city" />
-        ) : (null)}
-      </div>
-    </div>
+        {/* The command-bar shows what the player can do */}
+        <Grid.Row id="command-bar" columns={2}>
+          {commandsAvailable
+            ? (
+              <>
+                <Grid.Column width={6}><button className="ui button blue" onClick={flee}>Flee</button></Grid.Column>
+                <Grid.Column width={4}><button className="ui button red" onClick={playerAttack}>Attack</button></Grid.Column>
+                <Grid.Column width={6}><button className="ui button blue" onClick={useItem}>Use Potion</button></Grid.Column>
+              </>
+            )
+            : (
+              <Grid.Column width={16}><button className="ui button blue" onClick={progressTurn}>Continue</button></Grid.Column>
+            )}
+        </Grid.Row>
+      </Grid>
+
+      {gameOver & isEnemyAlive ? (
+        <Redirect to="/gameover" />
+      ) : (null)}
+      {gameOver & isPlayerAlive ? (
+        <Redirect to="/city" />
+      ) : (null)}
+    </>
   );
 };
 

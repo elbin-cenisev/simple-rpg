@@ -5,6 +5,7 @@ function GameOverScreen() {
   return (
     <>
       <div>
+        <Header />
         <h1>GAME OVER</h1>
       </div>
     </>

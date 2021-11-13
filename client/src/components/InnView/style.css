@@ -17,16 +17,10 @@
     border: 1px solid black;
 }
 
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 100px;
-}
-
 #command-bar {
     margin-top:10px;
     border: none;
+    text-align: center;
 }
 
 button {
