@@ -76,7 +76,7 @@ function InnView() {
   useEffect(() => {
     dispatch({
       type: CHANGE_MESSAGE,
-      payload: `Would you like to rest for 50g?`,
+      payload: `Would you like to rest for 40g?`,
     })
   }, []);
 
