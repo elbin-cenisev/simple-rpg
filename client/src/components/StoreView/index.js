@@ -48,8 +48,8 @@ function StoreView() {
   }, []);
 
   return (
-<>
-    <Grid id="store-view">
+    <>
+      <Grid id="store-view">
         {/* The message-bar displays what is currently going on */}
         <Grid.Row centered id="message-bar">
           <p id="message">{message}</p>
@@ -69,6 +69,12 @@ function StoreView() {
       {cityVisit ? (
         <Redirect to="/city" />
       ) : (null)}
+
+      <audio
+        controls
+        autoPlay
+        src="./music/town-music.mp3" type="audio/mpeg">
+      </audio>
     </>
   );
 };

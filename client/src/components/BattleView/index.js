@@ -332,6 +332,13 @@ function BattleView() {
       {gameOver & isPlayerAlive ? (
         <Redirect to="/city" />
       ) : (null)}
+
+      <audio
+        controls
+        autoPlay
+        src="./music/battle-music.mp3" type="audio/mpeg">
+      </audio>
+
     </>
   );
 };

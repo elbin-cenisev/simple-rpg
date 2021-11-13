@@ -74,6 +74,12 @@ function CityView() {
           <Redirect to="/battle" />
         ) : (null)
       }
+
+      <audio
+        controls
+        autoPlay
+        src="./music/town-music.mp3" type="audio/mpeg">
+      </audio>
     </>
   );
 };

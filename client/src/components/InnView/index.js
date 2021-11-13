@@ -103,10 +103,16 @@ function InnView() {
         </Grid.Row>
       </Grid>
 
-        {/* Shows how much gold the player has in their posession */}
-        {cityVisit ? (
-          <Redirect to="/city" />
-        ) : (null)}
+      {/* Shows how much gold the player has in their posession */}
+      {cityVisit ? (
+        <Redirect to="/city" />
+      ) : (null)}
+
+      <audio
+        controls
+        autoPlay
+        src="./music/town-music.mp3" type="audio/mpeg">
+      </audio>
 
     </>
   );
