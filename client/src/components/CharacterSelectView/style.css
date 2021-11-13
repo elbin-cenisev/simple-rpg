@@ -2,6 +2,8 @@
     width: 70%;
     margin: auto;
     padding: 50px;
+    background-color: #6993b8;
+    border-radius: 20px;
 }
 
 .button-bar {
@@ -12,8 +14,13 @@
     padding: 20px !important
 }
 
+.item td {
+    background-color: #cddbe7;
+}
+
 .item:hover {
-    background-color: rgb(236, 236, 236);
+    background-color: #cddbe7;
+    border-radius: 20px;
 }
 
 .descriptor {

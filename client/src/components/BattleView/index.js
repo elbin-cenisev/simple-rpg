@@ -305,7 +305,7 @@ function BattleView() {
 
           {/* If enemy is alive, show their picture */}
           {isEnemyAlive ? (
-            <img src={'./images/slime.png'} />
+            <img src={'./images/orc.png'} />
           ) : (null)}
 
         </Grid.Row>

@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   enemy: {
-    name: "Slime",
+    name: "Orc",
     maxHP: 20,
     damMod: 0.3,
     evasMod: .1,
