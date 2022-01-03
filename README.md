@@ -14,7 +14,7 @@ HTML, CSS, JavaScript, Bootstrap CSS Framework, React, GraphQL, Mongoose, Apollo
 
 ## Installation
 The easiest way to start playing is to click the link in the Deployed Link section.
-Alternatively, you could clone the repository, run npm install in VSCode and host the server on localhost (MongoDB).
+Alternatively, you could clone the repository, run npm install in VSCode and host the server on localhost (MongoDB). You can run the app by using the npm start command.
 
 ## Deployed Link
 https://blooming-river-68773.herokuapp.com/
